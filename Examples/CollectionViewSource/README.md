@@ -4,7 +4,7 @@
 
 In this example we want to filter data in a DataGrid.
 
-This is a trivial example without MVVM and other best practice.
+This is a trivial example without MVVM and other best practices.
 
 ## Screenshot
 
@@ -12,7 +12,7 @@ This is a trivial example without MVVM and other best practice.
 
 ## Walkthrough this example
 
-First we are creating in `Window` a Resources with the Name `ViewModel` from type `ViewModel`.
+First, we are creating in `Window` a Resources with the Name `ViewModel` from type `ViewModel`.
 
 ```xml
 <Window
@@ -29,7 +29,7 @@ This `StaticResource` is set as `DataContext` in `Grid`, so that we have access 
 <Grid DataContext="{StaticResource ViewModel}">
 ```
 
-The property `FilterValue` from `ViewModel` is set as `Binding` in this `TextBox`. This will be used to enter the text which we will useed to filter.
+The property `FilterValue` from `ViewModel` is set as `Binding` in this `TextBox`. This will be used to enter the text which we will used to filter.
 
 ```xml
 <TextBox
@@ -65,7 +65,7 @@ We are creating 100 instances of Car ...
 var cars = Enumerable.Range(0, 100).Select(i => Car.CreateRandom());
 ```
 
-... and with GetDefaultView we are creating an `ICollectionView` which contains all of these 100 instances. This will be the public property which we will bind to the GridView.
+... and with GetDefaultView we are creating an `ICollectionView` which contains all of these 100 instances. This will be the public property that we will bind to the GridView.
 
 ```csharp
 var collectionView = System.Windows.Data.CollectionViewSource.GetDefaultView(cars);
