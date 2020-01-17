@@ -23,13 +23,13 @@ First we are creating in `Window` a Resources with the Name `ViewModel` from typ
 </Window.Resources>
 ```
 
-This `StaticResource` is set as `DataContext` in `Grid`, so that we have access to all `publi`c member of class `ViewModel`.
+This `StaticResource` is set as `DataContext` in `Grid`, so that we have access to all `public` member of class `ViewModel`.
 
 ```xml
 <Grid DataContext="{StaticResource ViewModel}">
 ```
 
-The property `FilterValue` from `ViewModel` is set as `Binding` in this `TextBox`. This will be used to enter the text which we will useed to filter.
+The property `FilterValue` from `ViewModel` is set as `Binding` in this `TextBox`. This will be used to enter the text which we will use to filter.
 
 ```xml
 <TextBox
@@ -72,13 +72,13 @@ var collectionView = System.Windows.Data.CollectionViewSource.GetDefaultView(car
 this.Cars = collectionView;
 ```
 
-Zo CollectionView.Filter we assign the method which implements the filter, this must be a predicate.
+To collectionView.Filter we assign the method which implements the filter, this must be a predicate.
 
 ```csharp
 collectionView.Filter = Filter;
 ```
 
-This public property is bind to the `TextBox` where the filter value will be entered. `set_FilterValue` container `this.Cars.Refresh();` which will trigger the filter process.
+This public property is bound to the `TextBox` where the filter value will be entered. `set_FilterValue` contains `this.Cars.Refresh();` which will trigger the filter process.
 
 ```csharp
 public string FilterValue
