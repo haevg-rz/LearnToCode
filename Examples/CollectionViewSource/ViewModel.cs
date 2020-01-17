@@ -6,8 +6,6 @@ namespace CollectionViewSource
 {
     public class ViewModel
     {
-        private string filterValue;
-
         public ViewModel()
         {
             var cars = Enumerable.Range(0, 100).Select(i => Car.CreateRandom());
@@ -40,6 +38,7 @@ namespace CollectionViewSource
             return false;
         }
 
+        private string filterValue;
         public string FilterValue
         {
             get => filterValue;
