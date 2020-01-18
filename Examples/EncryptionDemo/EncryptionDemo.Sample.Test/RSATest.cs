@@ -6,7 +6,7 @@ using Xunit;
 
 namespace EncryptionDemo.Sample.Test
 {
-    public class RsaSampleTest
+    public class RSATest
     {
         public string AlicePrivatePublicXml { get; }
         public string AlicePublicXml { get; }
@@ -18,16 +18,16 @@ namespace EncryptionDemo.Sample.Test
 
         public byte[] GetPlainData() => Encoding.UTF8.GetBytes(PlainString);
 
-        public RsaSampleTest()
+        public RSATest()
         {
-            this.AlicePrivatePublicXml = RsaSample.CreateRsaKeyPair();
-            this.AlicePublicXml = RsaSample.ExtractPublicKey(AlicePrivatePublicXml);
+            this.AlicePrivatePublicXml = Rsa.CreateRsaKeyPair();
+            this.AlicePublicXml = Rsa.ExtractPublicKey(AlicePrivatePublicXml);
 
-            this.BobPrivatePublicXml = RsaSample.CreateRsaKeyPair();
-            this.BobPublicXml = RsaSample.ExtractPublicKey(BobPrivatePublicXml);
+            this.BobPrivatePublicXml = Rsa.CreateRsaKeyPair();
+            this.BobPublicXml = Rsa.ExtractPublicKey(BobPrivatePublicXml);
 
-            this.EvePrivatePublicXml = RsaSample.CreateRsaKeyPair();
-            this.EvePublicXml = RsaSample.ExtractPublicKey(EvePrivatePublicXml);
+            this.EvePrivatePublicXml = Rsa.CreateRsaKeyPair();
+            this.EvePublicXml = Rsa.ExtractPublicKey(EvePrivatePublicXml);
 
             this.PlainString = Guid.NewGuid().ToString();
         }
@@ -43,8 +43,8 @@ namespace EncryptionDemo.Sample.Test
 
             #region Act
 
-            var signature = RsaSample.Sign(AlicePrivatePublicXml, plainData);
-            var verify = RsaSample.Verify(AlicePublicXml, plainData, signature);
+            var signature = Rsa.Sign(AlicePrivatePublicXml, plainData);
+            var verify = Rsa.Verify(AlicePublicXml, plainData, signature);
 
             #endregion
 
@@ -72,7 +72,7 @@ namespace EncryptionDemo.Sample.Test
 
             #region Act
 
-            var signature = RsaSample.Sign(AlicePrivatePublicXml, plainData);
+            var signature = Rsa.Sign(AlicePrivatePublicXml, plainData);
             switch (testCase)
             {
                 case "TamperSignature":
@@ -82,7 +82,7 @@ namespace EncryptionDemo.Sample.Test
                     plainData[plainData.Length / 2] ^= plainData[plainData.Length / 2];
                     break;
             }
-            var verify = RsaSample.Verify(AlicePublicXml, plainData, signature);
+            var verify = Rsa.Verify(AlicePublicXml, plainData, signature);
 
             #endregion
 
