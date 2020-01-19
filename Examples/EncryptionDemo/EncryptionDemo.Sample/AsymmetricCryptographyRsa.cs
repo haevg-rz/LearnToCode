@@ -2,7 +2,7 @@
 
 namespace EncryptionDemo.Sample
 {
-    public class AsymmetricCryptography
+    public class AsymmetricCryptographyRsa
     {
         // see BSI TR-02102-1 
         private const int RsaKeySize = 1024 * 4;

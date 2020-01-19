@@ -6,7 +6,7 @@ using Xunit;
 
 namespace EncryptionDemo.Sample.Test
 {
-    public class RSATest
+    public class AsymmetricCryptographyRsaTest
     {
         public string AlicePrivatePublicXml { get; }
         public string AlicePublicXml { get; }
@@ -18,16 +18,16 @@ namespace EncryptionDemo.Sample.Test
 
         public byte[] GetPlainData() => Encoding.UTF8.GetBytes(PlainString);
 
-        public RSATest()
+        public AsymmetricCryptographyRsaTest()
         {
-            this.AlicePrivatePublicXml = AsymmetricCryptography.CreateRsaKeyPair();
-            this.AlicePublicXml = AsymmetricCryptography.ExtractPublicKey(AlicePrivatePublicXml);
+            this.AlicePrivatePublicXml = AsymmetricCryptographyRsa.CreateRsaKeyPair();
+            this.AlicePublicXml = AsymmetricCryptographyRsa.ExtractPublicKey(AlicePrivatePublicXml);
 
-            this.BobPrivatePublicXml = AsymmetricCryptography.CreateRsaKeyPair();
-            this.BobPublicXml = AsymmetricCryptography.ExtractPublicKey(BobPrivatePublicXml);
+            this.BobPrivatePublicXml = AsymmetricCryptographyRsa.CreateRsaKeyPair();
+            this.BobPublicXml = AsymmetricCryptographyRsa.ExtractPublicKey(BobPrivatePublicXml);
 
-            this.EvePrivatePublicXml = AsymmetricCryptography.CreateRsaKeyPair();
-            this.EvePublicXml = AsymmetricCryptography.ExtractPublicKey(EvePrivatePublicXml);
+            this.EvePrivatePublicXml = AsymmetricCryptographyRsa.CreateRsaKeyPair();
+            this.EvePublicXml = AsymmetricCryptographyRsa.ExtractPublicKey(EvePrivatePublicXml);
 
             this.PlainString = Guid.NewGuid().ToString();
         }
@@ -43,8 +43,8 @@ namespace EncryptionDemo.Sample.Test
 
             #region Act
 
-            var signature = AsymmetricCryptography.Sign(AlicePrivatePublicXml, plainData);
-            var verify = AsymmetricCryptography.Verify(AlicePublicXml, plainData, signature);
+            var signature = AsymmetricCryptographyRsa.Sign(AlicePrivatePublicXml, plainData);
+            var verify = AsymmetricCryptographyRsa.Verify(AlicePublicXml, plainData, signature);
 
             #endregion
 
@@ -72,7 +72,7 @@ namespace EncryptionDemo.Sample.Test
 
             #region Act
 
-            var signature = AsymmetricCryptography.Sign(AlicePrivatePublicXml, plainData);
+            var signature = AsymmetricCryptographyRsa.Sign(AlicePrivatePublicXml, plainData);
             switch (testCase)
             {
                 case "TamperSignature":
@@ -82,7 +82,7 @@ namespace EncryptionDemo.Sample.Test
                     plainData[plainData.Length / 2] ^= plainData[plainData.Length / 2];
                     break;
             }
-            var verify = AsymmetricCryptography.Verify(AlicePublicXml, plainData, signature);
+            var verify = AsymmetricCryptographyRsa.Verify(AlicePublicXml, plainData, signature);
 
             #endregion
 

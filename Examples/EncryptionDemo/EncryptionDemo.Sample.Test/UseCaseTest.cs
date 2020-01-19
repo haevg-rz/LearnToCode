@@ -38,13 +38,13 @@ namespace EncryptionDemo.Sample.Test
                 sharedPasswort = alicePassword;
                 outputHelper.WriteLine($"Alice tells Bob the password");
 
-                var (key, salt) = KeyGeneration.CreateFromPassword(alicePassword, 256);
+                var (key, salt) = Sample.KeyGeneration.CreateFromPassword(alicePassword, 256);
                 outputHelper.WriteLine($"The key derivation algorithm will create this key:  {key.ToText()}");
                 outputHelper.WriteLine($"The key derivation algorithm will create this salt: {salt.ToText()}");
                 outputHelper.WriteLine($"The key derivation settings are known");
-                outputHelper.WriteLine($"HashAlgorithm:  {KeyGeneration.HashAlgorithmSha256.ToString()}");
-                outputHelper.WriteLine($"SaltSizeInBits: {KeyGeneration.SaltSizeInBits}");
-                outputHelper.WriteLine($"Iterations:     {KeyGeneration.Iterations:N0}");
+                outputHelper.WriteLine($"HashAlgorithm:  {Sample.KeyGeneration.HashAlgorithmSha256.ToString()}");
+                outputHelper.WriteLine($"SaltSizeInBits: {Sample.KeyGeneration.SaltSizeInBits}");
+                outputHelper.WriteLine($"Iterations:     {Sample.KeyGeneration.Iterations:N0}");
 
                 outputHelper.WriteLine($"Alice will encrypt this data with AES GCM.");
                 var associatedData = DateTime.Now.ToString(CultureInfo.InvariantCulture);
@@ -69,7 +69,7 @@ namespace EncryptionDemo.Sample.Test
 
                 outputHelper.WriteLine($"Bob will use the password: {sharedPasswort}");
                 
-                var (key, _) = KeyGeneration.CreateFromPassword(sharedPasswort, 256, fileforBob.salt);
+                var (key, _) = Sample.KeyGeneration.CreateFromPassword(sharedPasswort, 256, fileforBob.salt);
                 outputHelper.WriteLine($"The key derivation algorithm will create this key:  {key.ToText()}");
 
                 outputHelper.WriteLine($"Bob will decrypt this data with AES GCM.");

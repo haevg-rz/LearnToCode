@@ -6,7 +6,7 @@ using Xunit;
 
 namespace EncryptionDemo.Sample.Test
 {
-    public class KeyTest
+    public class KeyGeneration
     {
         [Theory()]
         [InlineData(512)]
@@ -22,7 +22,7 @@ namespace EncryptionDemo.Sample.Test
 
             #region Act
 
-            var key = KeyGeneration.CreateRandom(keySizeBit);
+            var key = Sample.KeyGeneration.CreateRandom(keySizeBit);
 
             #endregion
 
@@ -47,8 +47,8 @@ namespace EncryptionDemo.Sample.Test
 
             #region Act
 
-            var (key1, salt) = KeyGeneration.CreateFromPassword(password, keySizeBit);
-            var (key2, _) = KeyGeneration.CreateFromPassword(password, keySizeBit, salt);
+            var (key1, salt) = Sample.KeyGeneration.CreateFromPassword(password, keySizeBit);
+            var (key2, _) = Sample.KeyGeneration.CreateFromPassword(password, keySizeBit, salt);
 
             #endregion
 
@@ -77,7 +77,7 @@ namespace EncryptionDemo.Sample.Test
 
             #region Act
 
-            var (key1, salt) = KeyGeneration.CreateFromPassword(password, keySizeBit);
+            var (key1, salt) = Sample.KeyGeneration.CreateFromPassword(password, keySizeBit);
             switch (testCase)
             {
                 case "TamperSalt":
@@ -87,7 +87,7 @@ namespace EncryptionDemo.Sample.Test
                     password += "#";
                     break;
             }
-            var (key2, _) = KeyGeneration.CreateFromPassword(password, keySizeBit, salt);
+            var (key2, _) = Sample.KeyGeneration.CreateFromPassword(password, keySizeBit, salt);
 
             #endregion
 

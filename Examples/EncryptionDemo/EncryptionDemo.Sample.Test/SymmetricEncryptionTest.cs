@@ -6,7 +6,7 @@ using Xunit;
 
 namespace EncryptionDemo.Sample.Test
 {
-    public class AesTest
+    public class SymmetricEncryptionTest
     {
         public string PlainString { get; } = Guid.NewGuid().ToString();
         public byte[] PlainData  => Encoding.UTF8.GetBytes(PlainString);
@@ -16,7 +16,7 @@ namespace EncryptionDemo.Sample.Test
         {
             #region Arange
 
-            var key = KeyGeneration.CreateRandom(256);
+            var key = Sample.KeyGeneration.CreateRandom(256);
             var associatedData = Guid.NewGuid().ToByteArray();
 
             #endregion
