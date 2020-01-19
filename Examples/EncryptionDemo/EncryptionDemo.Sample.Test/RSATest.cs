@@ -20,14 +20,14 @@ namespace EncryptionDemo.Sample.Test
 
         public RSATest()
         {
-            this.AlicePrivatePublicXml = Rsa.CreateRsaKeyPair();
-            this.AlicePublicXml = Rsa.ExtractPublicKey(AlicePrivatePublicXml);
+            this.AlicePrivatePublicXml = AsymmetricCryptography.CreateRsaKeyPair();
+            this.AlicePublicXml = AsymmetricCryptography.ExtractPublicKey(AlicePrivatePublicXml);
 
-            this.BobPrivatePublicXml = Rsa.CreateRsaKeyPair();
-            this.BobPublicXml = Rsa.ExtractPublicKey(BobPrivatePublicXml);
+            this.BobPrivatePublicXml = AsymmetricCryptography.CreateRsaKeyPair();
+            this.BobPublicXml = AsymmetricCryptography.ExtractPublicKey(BobPrivatePublicXml);
 
-            this.EvePrivatePublicXml = Rsa.CreateRsaKeyPair();
-            this.EvePublicXml = Rsa.ExtractPublicKey(EvePrivatePublicXml);
+            this.EvePrivatePublicXml = AsymmetricCryptography.CreateRsaKeyPair();
+            this.EvePublicXml = AsymmetricCryptography.ExtractPublicKey(EvePrivatePublicXml);
 
             this.PlainString = Guid.NewGuid().ToString();
         }
@@ -43,8 +43,8 @@ namespace EncryptionDemo.Sample.Test
 
             #region Act
 
-            var signature = Rsa.Sign(AlicePrivatePublicXml, plainData);
-            var verify = Rsa.Verify(AlicePublicXml, plainData, signature);
+            var signature = AsymmetricCryptography.Sign(AlicePrivatePublicXml, plainData);
+            var verify = AsymmetricCryptography.Verify(AlicePublicXml, plainData, signature);
 
             #endregion
 
@@ -72,7 +72,7 @@ namespace EncryptionDemo.Sample.Test
 
             #region Act
 
-            var signature = Rsa.Sign(AlicePrivatePublicXml, plainData);
+            var signature = AsymmetricCryptography.Sign(AlicePrivatePublicXml, plainData);
             switch (testCase)
             {
                 case "TamperSignature":
@@ -82,7 +82,7 @@ namespace EncryptionDemo.Sample.Test
                     plainData[plainData.Length / 2] ^= plainData[plainData.Length / 2];
                     break;
             }
-            var verify = Rsa.Verify(AlicePublicXml, plainData, signature);
+            var verify = AsymmetricCryptography.Verify(AlicePublicXml, plainData, signature);
 
             #endregion
 

@@ -5,14 +5,14 @@ using System.Text;
 
 namespace EncryptionDemo.Sample
 {
-    public class Key
+    public class KeyGeneration
     {
         // see TODO
-        private static readonly int SaltSizeInBits = SHA256.Create().HashSize;
-        private static readonly HashAlgorithmName HashAlgorithmSha256 = HashAlgorithmName.SHA256;
+        public static readonly int SaltSizeInBits = SHA256.Create().HashSize;
+        public static readonly HashAlgorithmName HashAlgorithmSha256 = HashAlgorithmName.SHA256;
 
         // see TODO
-        private const int Iterations = 100_000;
+        public const int Iterations = 100_000;
 
         public static byte[] CreateRandom(int sizeInBits)
         {

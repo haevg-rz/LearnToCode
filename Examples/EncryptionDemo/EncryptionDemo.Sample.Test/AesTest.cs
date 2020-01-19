@@ -16,14 +16,15 @@ namespace EncryptionDemo.Sample.Test
         {
             #region Arange
 
-            var key = Key.CreateRandom(256);
+            var key = KeyGeneration.CreateRandom(256);
+            var associatedData = Guid.NewGuid().ToByteArray();
 
             #endregion
 
             #region Act
 
 
-            var r = Aes.Encrypt(key, PlainData);
+            var r = SymmetricEncryption.Encrypt(key, PlainData, associatedData);
 
             #endregion
 

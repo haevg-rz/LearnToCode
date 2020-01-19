@@ -22,7 +22,7 @@ namespace EncryptionDemo.Sample.Test
 
             #region Act
 
-            var key = Key.CreateRandom(keySizeBit);
+            var key = KeyGeneration.CreateRandom(keySizeBit);
 
             #endregion
 
@@ -47,8 +47,8 @@ namespace EncryptionDemo.Sample.Test
 
             #region Act
 
-            var (key1, salt) = Key.CreateFromPassword(password, keySizeBit);
-            var (key2, _) = Key.CreateFromPassword(password, keySizeBit, salt);
+            var (key1, salt) = KeyGeneration.CreateFromPassword(password, keySizeBit);
+            var (key2, _) = KeyGeneration.CreateFromPassword(password, keySizeBit, salt);
 
             #endregion
 
@@ -77,7 +77,7 @@ namespace EncryptionDemo.Sample.Test
 
             #region Act
 
-            var (key1, salt) = Key.CreateFromPassword(password, keySizeBit);
+            var (key1, salt) = KeyGeneration.CreateFromPassword(password, keySizeBit);
             switch (testCase)
             {
                 case "TamperSalt":
@@ -87,7 +87,7 @@ namespace EncryptionDemo.Sample.Test
                     password += "#";
                     break;
             }
-            var (key2, _) = Key.CreateFromPassword(password, keySizeBit, salt);
+            var (key2, _) = KeyGeneration.CreateFromPassword(password, keySizeBit, salt);
 
             #endregion
 
