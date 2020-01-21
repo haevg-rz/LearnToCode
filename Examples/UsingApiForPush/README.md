@@ -6,16 +6,14 @@ We want to send a Push-Notification from our console application to our smartpho
 
 ![Screenshot](Assets/Screenshot.jpg)
 
-This is a very trival example for making http requests against an API.
+This is a very trivial example for making http requests against an API.
 
 ## Background
 
-Your smartphone is getting a lot of push notifications for a lot of different apps. But the apps are not pulling (check every second for incoming messages), there is a central server to which your smartphone is all the time connected. This permanent connection will reveice all notifications for all apps.
+Your smartphone is getting a lot of push notifications for a lot of different apps. But the apps are not pulling (check every second for incoming messages), there is a central server to which your smartphone is all the time connected. This permanent connection will receive all notifications for all apps.
 
 "Push technology, or server push, is a style of Internet-based communication where the request for a given transaction is initiated by the publisher or central server. It is contrasted with pull/get, where the request for the transmission of information is initiated by the receiver or client."
 [https://en.wikipedia.org/wiki/Push_technology](https://en.wikipedia.org/wiki/Push_technology)
-
-
 
 ## Prearrangement
 
@@ -50,43 +48,55 @@ dotnet sln add PushSample.csproj
 
 ### Implementation
 
-#### Implement a class for secrets
-
-> TODO
-
-```csharp
-public class Secrets
-{
-    public string Token { get; set; }
-    public string User { get; set; }
-}
-```
-
 #### Creating the parameter for the api
 
-> TODO
+> We are assigning the required parameters in the format that `FormUrlEncodedContent` expected.
 
 ```csharp
 var nameValueCollection = new List<KeyValuePair<String, String>>
 {
-    KeyValuePair.Create("token", secrets.Token),
-    KeyValuePair.Create("user", secrets.User),
+    KeyValuePair.Create("token", "add token here"),
+    KeyValuePair.Create("user", "add token here"),
     KeyValuePair.Create("title", "My first push message"),
     KeyValuePair.Create("message","Hello!"),
 };
 ```
 
-#### Make a request
+#### Creating a HTTP Client
 
-> TODO
+> Best practice is to reuse the same `HttpClient` instance. But be aware, no thread safety here.
 
 ```csharp
+private static readonly HttpClient Client = new HttpClient();
+```
+
+#### Make a request
+
+> We are making a `POST` request against the `url` with our parameter as `UrlEncoded`.
+
+```csharp
+const string url = "https://api.pushover.net/1/messages.json";
 var response = Client.PostAsync(url, new FormUrlEncodedContent(nameValueCollection)).GetAwaiter().GetResult();
+```
+
+#### check response
+
+> `response` hat a nice property `HttpResponseMessage.IsSuccessStatusCode` which gets a value that indicates whether the HTTP response was successful.
+
+```csharp
+if (response.IsSuccessStatusCode)
+{
+    Console.Out.WriteLine($"Push message was send!");
+}
+else
+{
+    Console.Out.WriteLine($"Push message wasn't send!");
+}
 ```
 
 #### Get the api rate limit
 
-> TODO
+> To see how many requests are allowed, you can evaluate the User Header `X-Limit-App-Remaining`.
 
 ```csharp
 response.Headers.FirstOrDefault(h => h.Key == "X-Limit-App-Remaining").Value?.FirstOrDefault();
@@ -94,7 +104,7 @@ response.Headers.FirstOrDefault(h => h.Key == "X-Limit-App-Remaining").Value?.Fi
 
 #### Do some formatting
 
-> TODO
+> You can make the request a lot prettier with some html styling.
 
 ```csharp
 KeyValuePair.Create("html", "1"),
@@ -105,7 +115,8 @@ KeyValuePair.Create("message", $"Send from <b>{Environment.UserName}</b> on <b>{
 
 ### Publish this application
 
-> TODO
+> It would be very nice to create one executable file that contains every that is needed. Since .NET Core 3 this is possible with
+> `/p:PublishSingleFile=true` and `/p:PublishTrimmed=true` to reduce the size. Don't use trim if you use reflection!
 
 #### For windows
 
