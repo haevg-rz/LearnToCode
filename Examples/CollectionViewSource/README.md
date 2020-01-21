@@ -68,7 +68,7 @@ var cars = Enumerable.Range(0, 100).Select(i => Car.CreateRandom());
 ... and with GetDefaultView we are creating an `ICollectionView` which contains all of these 100 instances. This will be the public property that we will bind to the GridView.
 
 ```csharp
-var collectionView = System.Windows.Data.CollectionViewSource.GetDefaultView(cars);
+ICollectionView collectionView = System.Windows.Data.CollectionViewSource.GetDefaultView(cars);
 this.Cars = collectionView;
 ```
 
