@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
-using MVVM_Beginner_Level.Annotations;
 
 namespace MVVM_Beginner_Level
 {
