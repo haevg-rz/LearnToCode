@@ -10,6 +10,7 @@ namespace MVVM_Beginner_Level
         public string Name { get; set; }
 
         private string greeting = "No greeting";
+
         public string Greeting
         {
             get => this.greeting;
@@ -24,7 +25,7 @@ namespace MVVM_Beginner_Level
 
         public ViewModel()
         {
-            MyCommand= new Command(() => this.Greeting = "Hallo "+this.Name);
+            MyCommand = new Command(() => this.Greeting = "Hallo " + this.Name);
         }
 
         #region INotifyPropertyChanged Members
