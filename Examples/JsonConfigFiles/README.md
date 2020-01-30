@@ -59,7 +59,7 @@ public class Settings
 
 Notice that we use a `List<User>`. This is necessary, since there are multiple users in our JSON file. Also, the JSON keys must match your class properties *exactly*, but they are not case-sensitive.
 
-In the next step, please install the `Newtonsoft.Json` NuGet package. This package provides two easy-to-use static methods to serialize objects into JSON string *and* unserialize JSON strings (which JSON files are, essentially) into objects.
+In the next step, please install the `Newtonsoft.Json` NuGet package. This package provides two easy-to-use static methods to serialize objects into JSON strings *and* unserialize JSON strings (which JSON files are, essentially) into objects.
 
 ### Deserialize example
 
@@ -78,7 +78,7 @@ string jsonString = JsonConvert.SerializeObject(Settings);
 Here, you serialize the object Settings (naturally of type `Settings`) back into a JSON string which you can then store in a file.
 
 
-## A typical safe spot for your configuration files
+## A safe spot for your configuration files
 
 On Windows, there is a special folder where applications can save user-specific configuration.
 This is the so-called AppData folder. You can find it here: `C:\Users\<YourUsername>\AppData\Roaming`.
