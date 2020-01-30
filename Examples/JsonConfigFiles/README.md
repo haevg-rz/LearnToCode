@@ -32,6 +32,8 @@ This is what a typical JSON configuration file might look like, depending on you
 
 C# is an object-oriented programming language, hence you need class models to reflect the structure of your JSON file.
 
+## Models
+
 For our example above, we need two different models, e.g. `Settings` and `User`.
 
 ```csharp
