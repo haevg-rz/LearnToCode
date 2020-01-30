@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Text;
 using FluentAssertions;
 using Newtonsoft.Json;
@@ -17,11 +18,74 @@ namespace EncryptionDemo.Sample.Test
         {
             this.outputHelper = outputHelper;
         }
-        
+
+        [Fact(DisplayName = "UseCase for Asymmetric Encryption")]
+        public void UseCase_Asymmetric()
+        {
+            string alicePlainText;
+            string bobPlainText;
+
+            outputHelper.WriteLine($"Alice is creating a RSA key pair");
+            var rsaAlicePrivate = AsymmetricCryptographyRsa.CreateRsaKeyPair();
+            var rsaAlicePublic = AsymmetricCryptographyRsa.ExtractPublicKey(rsaAlicePrivate);
+
+            outputHelper.WriteLine($"Bob is creating a RSA key pair");
+            var rsaBobPrivate = AsymmetricCryptographyRsa.CreateRsaKeyPair();
+            var rsaBobPublic = AsymmetricCryptographyRsa.ExtractPublicKey(rsaBobPrivate);
+
+            byte[] encryptedKey;
+            byte[] signature;
+            SymmetricEncryption.EncryptedDataContainer encryptedDataContainer;
+
+            // Alice
+            {
+                alicePlainText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
+                outputHelper.WriteLine($"Alice wants to encrypt: {alicePlainText}");
+
+                var key = Sample.KeyGeneration.CreateRandom(256);
+                outputHelper.WriteLine($"Alice is creating a random secret: {key.ToText()}");
+
+                encryptedKey = AsymmetricCryptographyRsa.Encrypt(rsaBobPublic, key);
+                outputHelper.WriteLine($"Alice encrypts the key with bobs public key: {encryptedKey.ToText()}");
+                
+                encryptedDataContainer = SymmetricEncryption.Encrypt(key, alicePlainText.ToData(), new byte[0]);
+                outputHelper.WriteLine($"Alice encrypts the data with the secret key");
+
+                signature = AsymmetricCryptographyRsa.Sign(rsaAlicePrivate, GetData(encryptedDataContainer));
+                outputHelper.WriteLine($"Alice sign the cipher text");
+
+                outputHelper.WriteLine($"Alice sends cipher text, signature and her public key to bob");
+            }
+
+            // Bob
+            {
+                var isValid = AsymmetricCryptographyRsa.Verify(rsaAlicePublic, GetData(encryptedDataContainer), signature);
+                outputHelper.WriteLine($"Bobs verify the signature of the cipher text, it is valid: {isValid}");
+
+                var decryptedKey = AsymmetricCryptographyRsa.Decrypt(rsaBobPrivate, encryptedKey);
+                outputHelper.WriteLine($"Bobs decrypt the decrypted key from Alice with his private key: { decryptedKey.ToText()}");
+
+                var decryptedData = SymmetricEncryption.Decrypt(decryptedKey, encryptedDataContainer);
+                bobPlainText = decryptedData.ToUtf8String();
+                outputHelper.WriteLine($"Bobs decrypt the data from Alice with his private key: {bobPlainText}");
+            }
+
+            alicePlainText.Should().BeEquivalentTo(bobPlainText, "The plain text must be the same.");
+        }
+
+        private byte[] GetData(SymmetricEncryption.EncryptedDataContainer encryptedDataContainer)
+        {
+            return encryptedDataContainer.AssociatedData
+                .Concat(encryptedDataContainer.CipherText)
+                .Concat(encryptedDataContainer.Nonce)
+                .Concat(encryptedDataContainer.Tag).ToArray();
+        }
+
+
         [Fact(DisplayName = "UseCase for Symmetric Encryption")]
         public void UseCase_Symmetric()
         {
-            string sharedPasswort;
+            string sharedPassword;
             (SymmetricEncryption.EncryptedDataContainer encryptedDataContainer, byte[] salt) fileforBob;
 
             string alicePlainText;
@@ -35,7 +99,7 @@ namespace EncryptionDemo.Sample.Test
 
                 var alicePassword = "Correct Horse Battery Staple";
                 outputHelper.WriteLine($"Alice will use password: {alicePassword}");
-                sharedPasswort = alicePassword;
+                sharedPassword = alicePassword;
                 outputHelper.WriteLine($"Alice tells Bob the password");
 
                 var (key, salt) = Sample.KeyGeneration.CreateFromPassword(alicePassword, 256);
@@ -67,9 +131,9 @@ namespace EncryptionDemo.Sample.Test
                 outputHelper.WriteLine(JsonConvert.SerializeObject(fileforBob.encryptedDataContainer, Formatting.Indented));
                 outputHelper.WriteLine($"Salt: {fileforBob.salt}");
 
-                outputHelper.WriteLine($"Bob will use the password: {sharedPasswort}");
+                outputHelper.WriteLine($"Bob will use the password: {sharedPassword}");
                 
-                var (key, _) = Sample.KeyGeneration.CreateFromPassword(sharedPasswort, 256, fileforBob.salt);
+                var (key, _) = Sample.KeyGeneration.CreateFromPassword(sharedPassword, 256, fileforBob.salt);
                 outputHelper.WriteLine($"The key derivation algorithm will create this key:  {key.ToText()}");
 
                 outputHelper.WriteLine($"Bob will decrypt this data with AES GCM.");

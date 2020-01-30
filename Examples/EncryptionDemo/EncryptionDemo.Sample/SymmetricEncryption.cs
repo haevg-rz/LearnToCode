@@ -36,7 +36,7 @@ namespace EncryptionDemo.Sample
         
         public static byte[] Decrypt(byte[] key, EncryptedDataContainer encryptedDataContainer)
         {
-            var plainText= new byte[encryptedDataContainer.CipherText.Length];
+            var plainText = new byte[encryptedDataContainer.CipherText.Length];
 
             var aes = new System.Security.Cryptography.AesGcm(key);
             aes.Decrypt(encryptedDataContainer.Nonce, encryptedDataContainer.CipherText, encryptedDataContainer.Tag, plainText,encryptedDataContainer.AssociatedData);
