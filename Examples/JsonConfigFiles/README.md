@@ -89,9 +89,14 @@ Being a proper developer yourself, you create a folder for your cool application
 There are special constans ready-to-use in C#. For the AppData folder, do this:
 
 ```csharp
-string appDatapath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+string appDatapath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + Path.DirectorySeparatorChar + "JsonConfigFiles";;
 ```
 
-If your Windows username is MyUser, then the variable `appDatapath` will contain `C:\Users\MyUser\AppData\Roaming`.
+The full path to app's config folder can be obtained like this:
+```csharp
+string filePath = Path.Combine(appDatapath, "settings.json");
+```
+
+If your Windows username is MyUser, then the variable `filePath` will contain `C:\Users\MyUser\AppData\Roaming\JsonConfigFiles\settings.json`.
 
 If you have questions, please don't hesitate to open an issue! Only then can we improve our LearnToCode repository.
