@@ -9,3 +9,4 @@ Learning assets from our students and trainees.
 3. [CollectionViewSource - How to filter data in a DataGrid](Examples/CollectionViewSource/README.md)
 4. [TemplateSwitching - How to switch between two DataTemplates](Examples/TemplateSwitching/README.md)
 5. [Push - Send notifications to Android and iPhone](Examples/UsingApiForPush/README.md)
+6. [Using JSON configuration files](Examples/JsonConfigFiles/README.md)
