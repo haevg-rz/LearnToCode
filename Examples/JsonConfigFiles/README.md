@@ -85,8 +85,7 @@ This is the so-called AppData folder. You can find it here: `C:\Users\<YourUsern
 If you open it, you can usually find many subfolders with the names of applications. They contain the configuration files of these applications.
 
 Being a proper developer yourself, you create a folder for your cool application, in this example it is `JsonConfigFiles`, because that is the name of the example project.
-
-There are special constans ready-to-use in C#. For the AppData folder, do this:
+There are special constants ready-to-use in C#. For the AppData folder, do this:
 
 ```csharp
 string appDatapath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) 
@@ -95,7 +94,7 @@ string appDatapath = Environment.GetFolderPath(Environment.SpecialFolder.Applica
 
 The full path to app's config folder can be obtained like this:
 ```csharp
-string filePath = Path.Combine(appDatapath, "settings.json");
+string filePath = appDatapath + Path.DirectorySeparatorChar + "settings.json";
 ```
 
 If your Windows username is MyUser, then the variable `filePath` will contain `C:\Users\MyUser\AppData\Roaming\JsonConfigFiles\settings.json`.
