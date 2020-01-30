@@ -1,0 +1,24 @@
+{
+	"apikey": "fje0wanb0fnswofnsiod",
+	"sessionid": 768,
+	"users": [
+		{
+			"name": "Hood",
+			"firstname": "Robin",
+			"email": "robin_hood@stealfromtherich.cc",
+			"job": "IT Security Expert"
+		},
+		{
+			"name": "Davis",
+			"firstname": "Mike",
+			"email": "mikedavis@domain.com",
+			"job": "Designer"
+		},
+		{
+			"name": "Doe",
+			"firstname": "Leo",
+			"email": "leo@doe.com",
+			"job": "Manager"
+		}
+	]
+}
