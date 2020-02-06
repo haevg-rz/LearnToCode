@@ -8,9 +8,9 @@ namespace LinqExample.Model
         public static IEnumerable<Employee> GenerateEmployees()
         {
             DataGenerator.ReadCount = 0;
-            return Enumerable.Range(1, 1_024).Select(i =>
+            return Enumerable.Range(1, 1_024).Select(_ =>
             {
-                DataGenerator.ReadCount = i;
+                DataGenerator.ReadCount +=1;
                 return Employee.CreateTestData();
             });
         }
