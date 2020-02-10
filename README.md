@@ -10,3 +10,4 @@ Learning assets from our students and trainees.
 4. [TemplateSwitching - How to switch between two DataTemplates](Examples/TemplateSwitching/README.md)
 5. [Push - Send notifications to Android and iPhone](Examples/UsingApiForPush/README.md)
 6. [Using JSON configuration files](Examples/JsonConfigFiles/README.md)
+7. [Mocking](Examples/Mock/README.md)
