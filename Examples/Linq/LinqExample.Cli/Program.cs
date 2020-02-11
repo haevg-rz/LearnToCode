@@ -41,7 +41,9 @@ namespace LinqExample.Cli
 
             Console.Out.WriteLine($"DataGenerator.ReadCount: {DataGenerator.ReadCount}");
 
-            var result = employees.Where(employee => employee.Department.Name == "IT").Take(10).Where(employee => employee.Age > 30);
+            var result = employees.Where(employee => employee.Department.Name == "IT")
+                .Take(10)
+                .Where(employee => employee.Age > 30);
 
             Console.Out.WriteLine($"DataGenerator.ReadCount: {DataGenerator.ReadCount}");
 
