@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text.Json;
+using System.Threading;
 using LinqExample.Model;
 
 namespace LinqExample.Cli
@@ -39,27 +41,73 @@ namespace LinqExample.Cli
 
             Console.Out.WriteLine($"DataGenerator.ReadCount: {DataGenerator.ReadCount}");
 
-            var result = employees.Where(employee => employee.Department.Name == "IT").Take(10).Where(employee => employee.Age>30);
+            var result = employees.Where(employee => employee.Department.Name == "IT").Take(10).Where(employee => employee.Age > 30);
 
             Console.Out.WriteLine($"DataGenerator.ReadCount: {DataGenerator.ReadCount}");
 
             var count = result.Count();
-            Console.Out.WriteLine("count: "+count);
+            Console.Out.WriteLine("count: " + count);
 
             Console.Out.WriteLine($"DataGenerator.ReadCount: {DataGenerator.ReadCount}");
         }
 
         private static void ForEach()
         {
-            
+            var employees = DataGenerator.GenerateEmployees();
+            employees.ToList().ForEach(employee => employee.Name = employee.Name.ToUpper());
         }
 
         private static void AvoidPossibleMultipleEnumeration()
         {
+            var data = Enumerable.Range(1, 10).Select(i =>
+            {
+                Thread.Sleep(100);
+                return DateTime.Now.Ticks;
+            });
+
+            var sw = Stopwatch.StartNew();
+
+            foreach (var entity in data)
+            {
+            }
+
+            Console.Out.WriteLine("1. Elapsed: " + sw.Elapsed); // Should be around 1s
+
+            sw.Restart();
+
+            foreach (var entity in data)
+            {
+            }
+
+            foreach (var entity in data)
+            {
+            }
+
+            Console.Out.WriteLine("2. Elapsed: " + sw.Elapsed); // Should be around 2s
+
+            sw.Restart();
+
+            var evaluatedData = data.ToArray();
+
+            foreach (var entity in evaluatedData)
+            {
+            }
+
+            foreach (var entity in evaluatedData)
+            {
+            }
+
+            Console.Out.WriteLine("3. Elapsed: " + sw.Elapsed); // Should be around 1s
         }
 
         private static void Basic_LargeQuery()
         {
+            var average = DataGenerator.GenerateEmployees()
+                .Where(e => e.Age > 30)
+                .Select(e => e.Salaries.OrderByDescending(s => s.Ende).First().Money)
+                .Average();
+              
+            Console.Out.WriteLine("Average Last Salary Employees Older Than 30: " + average);
         }
 
         private static void Basic_Group()
@@ -71,7 +119,7 @@ namespace LinqExample.Cli
                 Console.Out.WriteLine($"Dep: {g.Key}, count: {g.Count()}");
             }
 
-            var averageAgeByDep = employees.GroupBy(employee => employee.Department.Name).Select(g => new{ Department = g.Key, AverageAge = g.Average(employee => employee.Age)});
+            var averageAgeByDep = employees.GroupBy(employee => employee.Department.Name).Select(g => new {Department = g.Key, AverageAge = g.Average(employee => employee.Age)});
             foreach (var depAge in averageAgeByDep)
             {
                 Console.Out.WriteLine($"Dep: {depAge.Department}, AverageAge: {depAge.AverageAge}");
