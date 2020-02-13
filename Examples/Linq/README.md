@@ -33,6 +33,11 @@ public static int Sum(this IEnumerable<int> source)
 }
 ```
 
+```csharp
+var collection = List<int>(){12, 2};
+var sum = collection.Sum();
+```
+
 ### method-based query syntax
 
 ```csharp
@@ -71,6 +76,51 @@ Excerpt from [The history of C#](https://docs.microsoft.com/en-us/dotnet/csharp/
 - LINQ queries are evaluated when as late as possible
 - transparent process of evaluating the query
 - By using EF Core 3 LINQ queries are evaluated on the server
+
+## Basic of enumerators
+
+[Implementation of generic collection](https://github.com/dotnet/runtime/tree/4f9ae42d861fcb4be2fcd5d3d55d5f227d30e723/src/libraries/System.Private.CoreLib/src/System/Collections/Generic)
+
+### How does foreach work?
+
+The foreach statement executes a statement or a block of statements for each element in an instance of the type that implements the `System.Collections.IEnumerable` or `System.Collections.Generic.IEnumerable<T>` interface. The foreach statement is not limited to those types and can be applied to an instance of any type that satisfies the following conditions:
+
+- has the public parameterless GetEnumerator method whose return type is either class, struct, or interface type,
+- the return type of the GetEnumerator method has the public Current property and the public parameterless MoveNext method whose return type is Boolean.
+
+Source:  
+- [foreach, in (C# reference)](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/foreach-in)
+- [The foreach statement - language specification](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/statements#the-foreach-statement)
+
+### What is the IEnumerator Interface
+
+`IEnumerator` is the base interface for all non-generic enumerators.  
+`IEnumerator<T>` is the base interface for all generic enumerators.
+
+The foreach statement of the C# language (for each in C++, For Each in Visual Basic) hides the complexity of the enumerators. Therefore, using foreach is recommended, instead of directly manipulating the enumerator.
+
+Enumerators can be used to read the data in the collection, but they cannot be used to modify the underlying collection.
+
+Initially, the enumerator is positioned before the first element in the collection. At this position, Current is undefined. Therefore, you must call MoveNext to advance the enumerator to the first element of the collection before reading the value of Current.
+
+Current returns the same object until MoveNext is called. MoveNext sets Current to the next element.
+
+If MoveNext passes the end of the collection, the enumerator is positioned after the last element in the collection and MoveNext returns false. When the enumerator is at this position, subsequent calls to MoveNext also return false. If the last call to MoveNext returned false, Current is undefined. You cannot set Current to the first element of the collection again; you must create a new enumerator instance instead.
+
+If changes are made to the collection, such as adding, modifying, or deleting elements, the behavior of the enumerator is undefined.
+
+Source:  
+- [`IEnumerator<T>` Interface](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerator-1)
+- [`IEnumerator` Interface](https://docs.microsoft.com/en-us/dotnet/api/system.collections.ienumerator)
+
+#### Properties
+
+- Current - Gets the element in the collection at the current position of the enumerator.
+
+##### Methods
+
+- MoveNext() - Advances the enumerator to the next element of the collection.
+- Reset() - Sets the enumerator to its initial position, which is before the first element in the collection.
 
 ## More information to Linq
 
