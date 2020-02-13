@@ -53,6 +53,10 @@ IQueryable<Customer> custQuery =
     select cust;  
 ```
 
+## Examples
+
+See [LinqExample.Cli/Program.cs](LinqExample.Cli/Program.cs)
+
 ## History
 
 C# version 3.0 came in late 2007, along with Visual Studio 2008, though the full boat of language features would actually come with .NET Framework version 3.5. This version marked a major change in the growth of C#.
