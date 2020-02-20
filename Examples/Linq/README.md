@@ -126,6 +126,20 @@ Source:
 - MoveNext() - Advances the enumerator to the next element of the collection.
 - Reset() - Sets the enumerator to its initial position, which is before the first element in the collection.
 
+## Classification of Standard Query Operators by Manner of Execution
+
+- Immediate  
+  Immediate execution means that the **data source is read** and the **operation is performed** at the point in the code where the query is declared.
+- Deferred
+  - Streaming  
+  Streaming operators **do not have to read all** the source data before they yield elements.
+  - Non-Streaming  
+  Non-streaming operators **must read all** the source data before they can yield a result element.
+
+[Classification of Standard Query Operators by Manner of Execution (C#) @ docs.microsoft.com ](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/classification-of-standard-query-operators-by-manner-of-execution)
+
+Take should take a look at the [Classification Table](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/classification-of-standard-query-operators-by-manner-of-execution#classification-table)
+
 ## More information to Linq
 
 - [Standard Query Operators Overview](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/standard-query-operators-overview)
