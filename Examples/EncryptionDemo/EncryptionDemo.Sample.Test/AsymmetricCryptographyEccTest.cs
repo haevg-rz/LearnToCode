@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.Text;
 using FluentAssertions;
+using FluentAssertions.Equivalency;
+using Newtonsoft.Json;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -100,7 +103,6 @@ namespace EncryptionDemo.Sample.Test
             var keyPairAlive = AsymmetricCryptographyEcc.CreateKeyPair();
 
             var dataA = Guid.Empty.ToByteArray();
-            var dataB = Guid.Empty.ToByteArray();
 
             #endregion
 
@@ -119,11 +121,35 @@ namespace EncryptionDemo.Sample.Test
 
             #region Assert
 
-            // Todo why?
-            signatureB.Should().HaveCount(512 / 8 * 2);
-            // Todo why?
+            // The signature generation algorithm includes the selecting of a cryptographically secure random integer
+            // https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm
+
             signatureA.Should().NotEqual(signatureB);
-            
+
+            #endregion
+        }
+
+        [Fact]
+        public void VerifyData()
+        {
+            #region Arange
+
+            var keyPairAlive = AsymmetricCryptographyEcc.CreateKeyPair();
+
+            var dataA = Guid.Empty.ToByteArray();
+            var signatureA = AsymmetricCryptographyEcc.SignData(keyPairAlive.privateKeyInfo, dataA);
+
+            #endregion
+
+            #region Act
+
+            var verifyData = AsymmetricCryptographyEcc.VerifyData(keyPairAlive.subjectPublicKeyInfo, dataA, signatureA);
+
+            #endregion
+
+            #region Assert
+
+            verifyData.Should().BeTrue();
 
             #endregion
         }

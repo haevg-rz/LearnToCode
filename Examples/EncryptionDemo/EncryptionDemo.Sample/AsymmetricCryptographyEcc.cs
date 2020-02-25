@@ -21,8 +21,8 @@ namespace EncryptionDemo.Sample
         /// <returns></returns>
         public static (byte[] privateKeyInfo, byte[] subjectPublicKeyInfo) CreateKeyPair()
         {
-            var curve = ECDiffieHellman.Create(NamedCurveBrainpoolP512R1);
-            return (curve.ExportPkcs8PrivateKey(), curve.ExportSubjectPublicKeyInfo());
+            var ecDiffieHellman = ECDiffieHellman.Create(NamedCurveBrainpoolP512R1);
+            return (ecDiffieHellman.ExportPkcs8PrivateKey(), ecDiffieHellman.ExportSubjectPublicKeyInfo());
         }
 
         /// <summary>
@@ -32,38 +32,35 @@ namespace EncryptionDemo.Sample
         /// <returns></returns>
         public static byte[] GetPublicKey(byte[] key)
         {
-            var curve = ECDiffieHellman.Create(NamedCurveBrainpoolP512R1);
-            curve.ImportPkcs8PrivateKey(key, out var _);
-
-            var ecDsa = ECDsa.Create(NamedCurveBrainpoolP512R1);
-            ecDsa.ImportPkcs8PrivateKey(key, out var _);
+            var ecDiffieHellman = ECDiffieHellman.Create();
+            ecDiffieHellman.ImportPkcs8PrivateKey(key, out _);
          
-            return curve.ExportSubjectPublicKeyInfo();
+            return ecDiffieHellman.ExportSubjectPublicKeyInfo();
         }
 
         public static byte[] DeriveSecret(byte[] privateKeyInfo, byte[] subjectPublicKeyInfo)
         {
-            var curvePublic = ECDiffieHellman.Create(NamedCurveBrainpoolP512R1);
-            curvePublic.ImportSubjectPublicKeyInfo(subjectPublicKeyInfo, out var _);
+            var curvePublic = ECDiffieHellman.Create();
+            curvePublic.ImportSubjectPublicKeyInfo(subjectPublicKeyInfo, out _);
 
-            var curvePrivate = ECDiffieHellman.Create(NamedCurveBrainpoolP512R1);
-            curvePrivate.ImportPkcs8PrivateKey(privateKeyInfo, out var _);
+            var curvePrivate = ECDiffieHellman.Create();
+            curvePrivate.ImportPkcs8PrivateKey(privateKeyInfo, out _);
 
             return curvePrivate.DeriveKeyFromHash(curvePublic.PublicKey, DeriveHashAlgorithmName);
         }
 
         public static byte[] SignData(byte[] privateKeyInfo, byte[] data)
         {
-            var ecDsa = ECDsa.Create(NamedCurveBrainpoolP512R1);
-            ecDsa.ImportPkcs8PrivateKey(privateKeyInfo, out var _);
+            var ecDsa = ECDsa.Create();
+            ecDsa.ImportPkcs8PrivateKey(privateKeyInfo, out _);
 
             return ecDsa.SignData(data, SignHashAlgorithmName);
         }
 
         public static bool VerifyData(byte[] subjectPublicKeyInfo, byte[] data, byte[] signature)
         {
-            var ecDsa = ECDsa.Create(NamedCurveBrainpoolP512R1);
-            ecDsa.ImportSubjectPublicKeyInfo(subjectPublicKeyInfo, out var _);
+            var ecDsa = ECDsa.Create();
+            ecDsa.ImportSubjectPublicKeyInfo(subjectPublicKeyInfo, out _);
 
             return ecDsa.VerifyData(data, signature, SignHashAlgorithmName);
         }
