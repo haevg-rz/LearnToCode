@@ -7,6 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="assets\Certificate_1_pw_qwert.pfx" />
+    <None Remove="assets\Certificate_2_pw_qwert.pfx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="assets\Certificate_1_pw_qwert.pfx" />
+    <EmbeddedResource Include="assets\Certificate_2_pw_qwert.pfx" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="5.10.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />
     <PackageReference Include="xunit" Version="2.4.0" />
