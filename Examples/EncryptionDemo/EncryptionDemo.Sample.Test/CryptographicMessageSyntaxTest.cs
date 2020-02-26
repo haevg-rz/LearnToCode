@@ -13,11 +13,11 @@ using Xunit.Abstractions;
 
 namespace EncryptionDemo.Sample.Test
 {
-    public class EnvelopedCmsTest
+    public class CryptographicMessageSyntaxTest
     {
         private readonly ITestOutputHelper outputHelper;
 
-        public EnvelopedCmsTest(ITestOutputHelper outputHelper)
+        public CryptographicMessageSyntaxTest(ITestOutputHelper outputHelper)
         {
             this.outputHelper = outputHelper;
         }
