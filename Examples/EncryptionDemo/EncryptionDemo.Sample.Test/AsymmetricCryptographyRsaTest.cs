@@ -1,3 +1,6 @@
+// This code is only for demo purpose!
+// Don't be a fool by using this implementation in production.
+
 using System;
 using System.Security.Cryptography;
 using System.Text;

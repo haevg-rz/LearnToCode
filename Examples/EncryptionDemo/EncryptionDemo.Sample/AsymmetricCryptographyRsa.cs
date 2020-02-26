@@ -1,4 +1,7 @@
-﻿using System.Security.Cryptography;
+﻿// This code is only for demo purpose!
+// Don't be a fool by using this implementation in production.
+
+using System.Security.Cryptography;
 
 namespace EncryptionDemo.Sample
 {
