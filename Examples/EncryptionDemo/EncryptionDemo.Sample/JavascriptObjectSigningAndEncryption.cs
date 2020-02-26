@@ -25,7 +25,7 @@ namespace EncryptionDemo.Sample
                 {"exp", 1300819380}
             };
 
-            var token = Jose.JWT.Encode(plainText, secret, JweAlgorithm.A256KW, JweEncryption.A256GCM, extraHeaders: nonEncryptedHeaders);
+            var token = JWT.Encode(plainText, secret, JweAlgorithm.A256KW, JweEncryption.A256GCM, extraHeaders: nonEncryptedHeaders);
             return token;
         }
 
@@ -38,7 +38,7 @@ namespace EncryptionDemo.Sample
         /// <returns></returns>
         public static string Decrypt(byte[] secret, string token)
         {
-            var r = Jose.JWT.Decode(token, secret, JweAlgorithm.A256KW, JweEncryption.A256GCM);
+            var r = JWT.Decode(token, secret, JweAlgorithm.A256KW, JweEncryption.A256GCM);
             return r;
         }
 
@@ -59,7 +59,7 @@ namespace EncryptionDemo.Sample
             };
 
             // In this implemenation the PBKDF2 iteration count is hardcoded to 8.192 which could be low regarding the BSI Standard.
-            var token = Jose.JWT.Encode(plainText, password, JweAlgorithm.PBES2_HS512_A256KW, JweEncryption.A256GCM, extraHeaders: nonEncryptedHeaders);
+            var token = JWT.Encode(plainText, password, JweAlgorithm.PBES2_HS512_A256KW, JweEncryption.A256GCM, extraHeaders: nonEncryptedHeaders);
             return token;
         }
 
@@ -72,7 +72,7 @@ namespace EncryptionDemo.Sample
         /// <returns></returns>
         public static string Decrypt(string password, string token)
         {
-            var r = Jose.JWT.Decode(token, password, JweAlgorithm.PBES2_HS512_A256KW, JweEncryption.A256GCM);
+            var r = JWT.Decode(token, password, JweAlgorithm.PBES2_HS512_A256KW, JweEncryption.A256GCM);
             return r;
         }
 
@@ -92,11 +92,11 @@ namespace EncryptionDemo.Sample
                 {"exp", 1300819380}
             };
 
-            var publicKey = EccKey.New(exportParameters.Q.X, exportParameters.Q.Y, exportParameters.D, usage: CngKeyUsages.KeyAgreement);
+            var publicKey = EccKey.New(exportParameters.Q.X, exportParameters.Q.Y, exportParameters.D, CngKeyUsages.KeyAgreement);
 
             // Not Implemented for NETSTANDARD 1.4
             // https://github.com/dvsekhvalnov/jose-jwt/blob/e54de3bb706edf294053b4b86f0db47333d433ef/jose-jwt/crypto/ConcatKDF.cs#L43
-            var token = Jose.JWT.Encode(plainText, publicKey, JweAlgorithm.ECDH_ES, JweEncryption.A256GCM, extraHeaders: nonEncryptedHeaders);
+            var token = JWT.Encode(plainText, publicKey, JweAlgorithm.ECDH_ES, JweEncryption.A256GCM, extraHeaders: nonEncryptedHeaders);
             return token;
         }
 
@@ -117,7 +117,7 @@ namespace EncryptionDemo.Sample
             };
 
             // In this implemenation the PBKDF2 iteration count is hardcoded to 8.192 which could be low regarding the BSI Standard.
-            var token = Jose.JWT.Encode(plainText, rsa, JweAlgorithm.RSA_OAEP_256, JweEncryption.A256GCM, extraHeaders: nonEncryptedHeaders);
+            var token = JWT.Encode(plainText, rsa, JweAlgorithm.RSA_OAEP_256, JweEncryption.A256GCM, extraHeaders: nonEncryptedHeaders);
             return token;
         }
 
@@ -130,7 +130,7 @@ namespace EncryptionDemo.Sample
         /// <returns></returns>
         public static string Decrypt(RSA rsa, string token)
         {
-            var plain = Jose.JWT.Decode(token, rsa, JweAlgorithm.RSA_OAEP_256, JweEncryption.A256GCM);
+            var plain = JWT.Decode(token, rsa, JweAlgorithm.RSA_OAEP_256, JweEncryption.A256GCM);
             return plain;
         }
     }

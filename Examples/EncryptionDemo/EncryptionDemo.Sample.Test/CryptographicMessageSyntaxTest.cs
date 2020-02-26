@@ -32,10 +32,7 @@ namespace EncryptionDemo.Sample.Test
             executingAssembly.GetManifestResourceStream(name).CopyTo(ms);
 
             var secureString = new SecureString();
-            foreach (var item in "qwert")
-            {
-                secureString.AppendChar(item);
-            }
+            foreach (var item in "qwert") secureString.AppendChar(item);
 
             return new X509Certificate2(ms.ToArray(), secureString);
         }

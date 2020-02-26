@@ -16,20 +16,23 @@ namespace EncryptionDemo.Sample.Test
         public string EvePublicXml { get; }
         public string PlainString { get; }
 
-        public byte[] GetPlainData() => Encoding.UTF8.GetBytes(PlainString);
+        public byte[] GetPlainData()
+        {
+            return Encoding.UTF8.GetBytes(PlainString);
+        }
 
         public AsymmetricCryptographyRsaTest()
         {
-            this.AlicePrivatePublicXml = AsymmetricCryptographyRsa.CreateRsaKeyPair();
-            this.AlicePublicXml = AsymmetricCryptographyRsa.ExtractPublicKey(AlicePrivatePublicXml);
+            AlicePrivatePublicXml = AsymmetricCryptographyRsa.CreateRsaKeyPair();
+            AlicePublicXml = AsymmetricCryptographyRsa.ExtractPublicKey(AlicePrivatePublicXml);
 
-            this.BobPrivatePublicXml = AsymmetricCryptographyRsa.CreateRsaKeyPair();
-            this.BobPublicXml = AsymmetricCryptographyRsa.ExtractPublicKey(BobPrivatePublicXml);
+            BobPrivatePublicXml = AsymmetricCryptographyRsa.CreateRsaKeyPair();
+            BobPublicXml = AsymmetricCryptographyRsa.ExtractPublicKey(BobPrivatePublicXml);
 
-            this.EvePrivatePublicXml = AsymmetricCryptographyRsa.CreateRsaKeyPair();
-            this.EvePublicXml = AsymmetricCryptographyRsa.ExtractPublicKey(EvePrivatePublicXml);
+            EvePrivatePublicXml = AsymmetricCryptographyRsa.CreateRsaKeyPair();
+            EvePublicXml = AsymmetricCryptographyRsa.ExtractPublicKey(EvePrivatePublicXml);
 
-            this.PlainString = Guid.NewGuid().ToString();
+            PlainString = Guid.NewGuid().ToString();
         }
 
         [Fact]

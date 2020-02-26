@@ -18,7 +18,7 @@ namespace EncryptionDemo.Sample
 
         public static string CreateRsaKeyPair()
         {
-            using var rsa = System.Security.Cryptography.RSA.Create();
+            using var rsa = RSA.Create();
             rsa.KeySize = RsaKeySize;
 
             return rsa.ToXmlString(true);
@@ -26,7 +26,7 @@ namespace EncryptionDemo.Sample
 
         public static string ExtractPublicKey(string rsaXml)
         {
-            using var rsa = System.Security.Cryptography.RSA.Create();
+            using var rsa = RSA.Create();
             rsa.FromXmlString(rsaXml);
 
             return rsa.ToXmlString(false);
@@ -34,7 +34,7 @@ namespace EncryptionDemo.Sample
 
         public static byte[] Encrypt(string rsaXml, byte[] data)
         {
-            using var rsa = System.Security.Cryptography.RSA.Create();
+            using var rsa = RSA.Create();
             rsa.FromXmlString(rsaXml);
             var encrypted = rsa.Encrypt(data, RsaEncryptionPadding);
             return encrypted;
@@ -42,7 +42,7 @@ namespace EncryptionDemo.Sample
 
         public static byte[] Decrypt(string rsaXml, byte[] data)
         {
-            using var rsa = System.Security.Cryptography.RSA.Create();
+            using var rsa = RSA.Create();
             rsa.FromXmlString(rsaXml);
 
             // Todo chek prvivate key
@@ -52,7 +52,7 @@ namespace EncryptionDemo.Sample
 
         public static byte[] Sign(string rsaXml, byte[] data)
         {
-            using var rsa = System.Security.Cryptography.RSA.Create();
+            using var rsa = RSA.Create();
             rsa.FromXmlString(rsaXml);
             // Todo check prvivate key
             var signature = rsa.SignData(data, SignaturehashAlgorithmName, RsaSignaturePadding);
@@ -61,7 +61,7 @@ namespace EncryptionDemo.Sample
 
         public static bool Verify(string rsaXml, byte[] data, byte[] signature)
         {
-            using var rsa = System.Security.Cryptography.RSA.Create();
+            using var rsa = RSA.Create();
             rsa.FromXmlString(rsaXml);
             // Todo check private key
             var isVerifedData = rsa.VerifyData(data, signature, SignaturehashAlgorithmName, RsaSignaturePadding);
