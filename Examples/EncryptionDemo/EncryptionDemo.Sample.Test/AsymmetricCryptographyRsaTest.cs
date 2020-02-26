@@ -76,12 +76,13 @@ namespace EncryptionDemo.Sample.Test
             switch (testCase)
             {
                 case "TamperSignature":
-                    signature[signature.Length/2] ^= signature[signature.Length / 2];
+                    signature[signature.Length / 2] ^= signature[signature.Length / 2];
                     break;
                 case "TamperPlainData":
                     plainData[plainData.Length / 2] ^= plainData[plainData.Length / 2];
                     break;
             }
+
             var verify = AsymmetricCryptographyRsa.Verify(AlicePublicXml, plainData, signature);
 
             #endregion

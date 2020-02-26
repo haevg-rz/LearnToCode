@@ -36,6 +36,7 @@ namespace EncryptionDemo.Sample.Test
             {
                 secureString.AppendChar(item);
             }
+
             return new X509Certificate2(ms.ToArray(), secureString);
         }
 
@@ -60,7 +61,7 @@ namespace EncryptionDemo.Sample.Test
             var cms = CryptographicMessageSyntax.Encrypt(data, cert);
             var plain = CryptographicMessageSyntax.Decrypt(cms, cert);
 
-            outputHelper.WriteLine(cms.Length+": "+Convert.ToBase64String(cms));
+            outputHelper.WriteLine(cms.Length + ": " + Convert.ToBase64String(cms));
 
             data.Should().NotEqual(cms);
             data.Should().Equal(plain);

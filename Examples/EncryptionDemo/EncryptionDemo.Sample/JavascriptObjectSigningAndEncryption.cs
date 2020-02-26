@@ -21,8 +21,8 @@ namespace EncryptionDemo.Sample
             // Claims see https://tools.ietf.org/html/rfc7519#section-4.1
             var nonEncryptedHeaders = new Dictionary<string, object>
             {
-                { "sub", "mr.x@contoso.com" },
-                { "exp", 1300819380 }
+                {"sub", "mr.x@contoso.com"},
+                {"exp", 1300819380}
             };
 
             var token = Jose.JWT.Encode(plainText, secret, JweAlgorithm.A256KW, JweEncryption.A256GCM, extraHeaders: nonEncryptedHeaders);
@@ -54,8 +54,8 @@ namespace EncryptionDemo.Sample
             // Claims see https://tools.ietf.org/html/rfc7519#section-4.1
             var nonEncryptedHeaders = new Dictionary<string, object>
             {
-                { "sub", "mr.x@contoso.com" },
-                { "exp", 1300819380 }
+                {"sub", "mr.x@contoso.com"},
+                {"exp", 1300819380}
             };
 
             // In this implemenation the PBKDF2 iteration count is hardcoded to 8.192 which could be low regarding the BSI Standard.
@@ -88,8 +88,8 @@ namespace EncryptionDemo.Sample
             // Claims see https://tools.ietf.org/html/rfc7519#section-4.1
             var nonEncryptedHeaders = new Dictionary<string, object>
             {
-                { "sub", "mr.x@contoso.com" },
-                { "exp", 1300819380 }
+                {"sub", "mr.x@contoso.com"},
+                {"exp", 1300819380}
             };
 
             var publicKey = EccKey.New(exportParameters.Q.X, exportParameters.Q.Y, exportParameters.D, usage: CngKeyUsages.KeyAgreement);
@@ -112,8 +112,8 @@ namespace EncryptionDemo.Sample
             // Claims see https://tools.ietf.org/html/rfc7519#section-4.1
             var nonEncryptedHeaders = new Dictionary<string, object>
             {
-                { "sub", "mr.x@contoso.com" },
-                { "exp", 1300819380 }
+                {"sub", "mr.x@contoso.com"},
+                {"exp", 1300819380}
             };
 
             // In this implemenation the PBKDF2 iteration count is hardcoded to 8.192 which could be low regarding the BSI Standard.

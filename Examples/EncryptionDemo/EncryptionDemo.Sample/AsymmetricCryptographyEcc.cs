@@ -10,8 +10,10 @@ namespace EncryptionDemo.Sample
     {
         // See
         private static readonly ECCurve NamedCurveBrainpoolP512R1 = ECCurve.NamedCurves.brainpoolP512r1;
+
         // See
         private static readonly HashAlgorithmName DeriveHashAlgorithmName = HashAlgorithmName.SHA512;
+
         // See
         private static readonly HashAlgorithmName SignHashAlgorithmName = HashAlgorithmName.SHA512;
 
@@ -34,7 +36,7 @@ namespace EncryptionDemo.Sample
         {
             var ecDiffieHellman = ECDiffieHellman.Create();
             ecDiffieHellman.ImportPkcs8PrivateKey(key, out _);
-         
+
             return ecDiffieHellman.ExportSubjectPublicKeyInfo();
         }
 

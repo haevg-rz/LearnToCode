@@ -16,8 +16,6 @@ namespace EncryptionDemo.Sample.Test
         {
             #region Arange
 
-
-
             #endregion
 
             #region Act
@@ -62,8 +60,8 @@ namespace EncryptionDemo.Sample.Test
             key1.Should().BeEquivalentTo(key2);
 
             #endregion
-        }  
-        
+        }
+
         [Theory()]
         [InlineData("TamperSalt", 512)]
         [InlineData("TamperPassword", 512)]
@@ -87,6 +85,7 @@ namespace EncryptionDemo.Sample.Test
                     password += "#";
                     break;
             }
+
             var (key2, _) = Sample.KeyGeneration.CreateFromPassword(password, keySizeBit, salt);
 
             #endregion

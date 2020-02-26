@@ -16,7 +16,7 @@ namespace EncryptionDemo.Sample
 
         public static byte[] CreateRandom(int sizeInBits)
         {
-            Span<byte> key =new byte[sizeInBits / 8];
+            Span<byte> key = new byte[sizeInBits / 8];
             using (var randomNumberGenerator = RandomNumberGenerator.Create())
             {
                 randomNumberGenerator.GetBytes(key);
@@ -25,14 +25,14 @@ namespace EncryptionDemo.Sample
             return key.ToArray();
         }
 
-        public static (byte[] key, byte[] salt) CreateFromPassword(string password, int sizeInBits, byte[] salt=null)
+        public static (byte[] key, byte[] salt) CreateFromPassword(string password, int sizeInBits, byte[] salt = null)
         {
-            if(salt==null)
+            if (salt == null)
                 salt = CreateRandom(SaltSizeInBits);
-            
+
             var rfc2898DeriveBytes = new Rfc2898DeriveBytes(Encoding.UTF8.GetBytes(password), salt, Iterations, HashAlgorithmSha256);
 
-            var key = rfc2898DeriveBytes.GetBytes(sizeInBits/8);
+            var key = rfc2898DeriveBytes.GetBytes(sizeInBits / 8);
             return (key, salt);
         }
     }

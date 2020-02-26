@@ -9,7 +9,7 @@ namespace EncryptionDemo.Sample.Test
     public class SymmetricEncryptionTest
     {
         public string PlainString { get; } = Guid.NewGuid().ToString();
-        public byte[] PlainData  => Encoding.UTF8.GetBytes(PlainString);
+        public byte[] PlainData => Encoding.UTF8.GetBytes(PlainString);
 
         [Fact]
         public void Encrypt()
@@ -22,7 +22,6 @@ namespace EncryptionDemo.Sample.Test
             #endregion
 
             #region Act
-
 
             var r = SymmetricEncryption.Encrypt(key, PlainData, associatedData);
 

@@ -47,7 +47,7 @@ namespace EncryptionDemo.Sample.Test
 
                 encryptedKey = AsymmetricCryptographyRsa.Encrypt(rsaBobPublic, key);
                 outputHelper.WriteLine($"Alice encrypts the key with bobs public key: {encryptedKey.ToText()}");
-                
+
                 encryptedDataContainer = SymmetricEncryption.Encrypt(key, alicePlainText.ToData(), new byte[0]);
                 outputHelper.WriteLine($"Alice encrypts the data with the secret key");
 
@@ -63,7 +63,7 @@ namespace EncryptionDemo.Sample.Test
                 outputHelper.WriteLine($"Bobs verify the signature of the cipher text, it is valid: {isValid}");
 
                 var decryptedKey = AsymmetricCryptographyRsa.Decrypt(rsaBobPrivate, encryptedKey);
-                outputHelper.WriteLine($"Bobs decrypt the decrypted key from Alice with his private key: { decryptedKey.ToText()}");
+                outputHelper.WriteLine($"Bobs decrypt the decrypted key from Alice with his private key: {decryptedKey.ToText()}");
 
                 var decryptedData = SymmetricEncryption.Decrypt(decryptedKey, encryptedDataContainer);
                 bobPlainText = decryptedData.ToUtf8String();
@@ -119,7 +119,7 @@ namespace EncryptionDemo.Sample.Test
                 outputHelper.WriteLine($"This is the tag, the authentication tag derived from the ciphertext: {encryptedDataContainer.Nonce.ToText()}");
                 outputHelper.WriteLine($"This is the nonce: {encryptedDataContainer.Tag.ToText()}");
 
-                fileforBob = (encryptedDataContainer: encryptedDataContainer, salt:salt);
+                fileforBob = (encryptedDataContainer: encryptedDataContainer, salt: salt);
                 outputHelper.WriteLine("Alice sends ciphertext, tag, nonce and salt to bob");
             }
 
@@ -132,7 +132,7 @@ namespace EncryptionDemo.Sample.Test
                 outputHelper.WriteLine($"Salt: {fileforBob.salt}");
 
                 outputHelper.WriteLine($"Bob will use the password: {sharedPassword}");
-                
+
                 var (key, _) = Sample.KeyGeneration.CreateFromPassword(sharedPassword, 256, fileforBob.salt);
                 outputHelper.WriteLine($"The key derivation algorithm will create this key:  {key.ToText()}");
 
@@ -153,7 +153,7 @@ namespace EncryptionDemo.Sample.Test
     {
         public static string ToText(this byte[] data)
         {
-            return Convert.ToBase64String(data)+$" ({data.Length*8} bit)";
+            return Convert.ToBase64String(data) + $" ({data.Length * 8} bit)";
         }
 
         public static byte[] ToData(this string text)

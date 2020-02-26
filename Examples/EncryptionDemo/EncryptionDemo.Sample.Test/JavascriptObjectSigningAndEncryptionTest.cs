@@ -36,9 +36,9 @@ namespace EncryptionDemo.Sample.Test
 
             #region Assert
 
-            outputHelper.WriteLine("Token: "+ cipherText);
-            outputHelper.WriteLine("Secret: "+ Convert.ToBase64String(key)+ " (Base64Encode)");
-            outputHelper.WriteLine("Secret: " + Microsoft.AspNetCore.WebUtilities.WebEncoders.Base64UrlEncode(key)+ " (Base64UrlEncode)");
+            outputHelper.WriteLine("Token: " + cipherText);
+            outputHelper.WriteLine("Secret: " + Convert.ToBase64String(key) + " (Base64Encode)");
+            outputHelper.WriteLine("Secret: " + Microsoft.AspNetCore.WebUtilities.WebEncoders.Base64UrlEncode(key) + " (Base64UrlEncode)");
 
             plain.Should().NotBe(cipherText);
 
@@ -64,15 +64,16 @@ namespace EncryptionDemo.Sample.Test
 
             #region Assert
 
-            outputHelper.WriteLine("Token: "+ token);
-            outputHelper.WriteLine("Secret: "+ Convert.ToBase64String(key)+ " (Base64Encode)");
-            outputHelper.WriteLine("Secret: " + Microsoft.AspNetCore.WebUtilities.WebEncoders.Base64UrlEncode(key)+ " (Base64UrlEncode)");
+            outputHelper.WriteLine("Token: " + token);
+            outputHelper.WriteLine("Secret: " + Convert.ToBase64String(key) + " (Base64Encode)");
+            outputHelper.WriteLine("Secret: " + Microsoft.AspNetCore.WebUtilities.WebEncoders.Base64UrlEncode(key) + " (Base64UrlEncode)");
 
             plain.Should().NotBe(token);
             decrypted.Should().Be(plain);
 
             #endregion
         }
+
         [Fact]
         public void EncryptWithPassword()
         {
@@ -91,7 +92,7 @@ namespace EncryptionDemo.Sample.Test
 
             #region Assert
 
-            outputHelper.WriteLine("Token: "+ cipherText);
+            outputHelper.WriteLine("Token: " + cipherText);
 
             plain.Should().NotBe(cipherText);
 
@@ -117,7 +118,7 @@ namespace EncryptionDemo.Sample.Test
 
             #region Assert
 
-            outputHelper.WriteLine("Token: "+ token);
+            outputHelper.WriteLine("Token: " + token);
 
             plain.Should().NotBe(token);
             decrypted.Should().Be(plain);
@@ -146,7 +147,7 @@ namespace EncryptionDemo.Sample.Test
 
             #region Assert
 
-            outputHelper.WriteLine("Token: "+ token);
+            outputHelper.WriteLine("Token: " + token);
 
             // TODO
             plain.Should().NotBe(token);
@@ -172,7 +173,7 @@ namespace EncryptionDemo.Sample.Test
 
             #region Assert
 
-            outputHelper.WriteLine("Token: "+ token);
+            outputHelper.WriteLine("Token: " + token);
 
             plain.Should().NotBe(token);
 
@@ -200,7 +201,7 @@ namespace EncryptionDemo.Sample.Test
 
             outputHelper.WriteLine("Token: " + token);
 
-            
+
             plain.Should().Be(decypted);
 
             #endregion

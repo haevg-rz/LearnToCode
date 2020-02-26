@@ -6,10 +6,13 @@ namespace EncryptionDemo.Sample
     {
         // see BSI TR-02102-1 
         private const int RsaKeySize = 1024 * 4;
+
         // see BSI TR-02102-1 
         private static readonly RSAEncryptionPadding RsaEncryptionPadding = RSAEncryptionPadding.OaepSHA512;
+
         // see BSI TR-02102-1 
         private static readonly RSASignaturePadding RsaSignaturePadding = RSASignaturePadding.Pss;
+
         // see BSI TR-02102-1 
         private static readonly HashAlgorithmName SignaturehashAlgorithmName = HashAlgorithmName.SHA512;
 
@@ -17,7 +20,7 @@ namespace EncryptionDemo.Sample
         {
             using var rsa = System.Security.Cryptography.RSA.Create();
             rsa.KeySize = RsaKeySize;
-                
+
             return rsa.ToXmlString(true);
         }
 
@@ -25,7 +28,7 @@ namespace EncryptionDemo.Sample
         {
             using var rsa = System.Security.Cryptography.RSA.Create();
             rsa.FromXmlString(rsaXml);
-                
+
             return rsa.ToXmlString(false);
         }
 
@@ -52,7 +55,7 @@ namespace EncryptionDemo.Sample
             using var rsa = System.Security.Cryptography.RSA.Create();
             rsa.FromXmlString(rsaXml);
             // Todo check prvivate key
-            var signature = rsa.SignData(data,SignaturehashAlgorithmName, RsaSignaturePadding);
+            var signature = rsa.SignData(data, SignaturehashAlgorithmName, RsaSignaturePadding);
             return signature;
         }
 

@@ -23,6 +23,7 @@ namespace EncryptionDemo.Sample
             {
                 cmsRecipientCollection.Add(new CmsRecipient(x509Certificate2, RSAEncryptionPadding.OaepSHA512));
             }
+
             envelopedCms.Encrypt(cmsRecipientCollection);
 
             return envelopedCms.Encode();

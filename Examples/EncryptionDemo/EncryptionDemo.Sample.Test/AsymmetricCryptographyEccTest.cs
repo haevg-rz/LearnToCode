@@ -24,8 +24,6 @@ namespace EncryptionDemo.Sample.Test
         {
             #region Arange
 
-
-
             #endregion
 
             #region Act

@@ -17,10 +17,10 @@ namespace EncryptionDemo.Sample
 
         public static EncryptedDataContainer Encrypt(byte[] key, byte[] plain, byte[] associatedData)
         {
-            var nonce = KeyGeneration.CreateRandom(System.Security.Cryptography.AesGcm.NonceByteSizes.MaxSize*8);
+            var nonce = KeyGeneration.CreateRandom(System.Security.Cryptography.AesGcm.NonceByteSizes.MaxSize * 8);
 
             var tag = new byte[System.Security.Cryptography.AesGcm.TagByteSizes.MaxSize];
-            var cipherText= new byte[plain.Length];
+            var cipherText = new byte[plain.Length];
 
             var aes = new System.Security.Cryptography.AesGcm(key);
             aes.Encrypt(nonce, plain, cipherText, tag, associatedData);
@@ -32,14 +32,14 @@ namespace EncryptionDemo.Sample
                 Tag = tag,
                 AssociatedData = associatedData
             };
-        } 
-        
+        }
+
         public static byte[] Decrypt(byte[] key, EncryptedDataContainer encryptedDataContainer)
         {
             var plainText = new byte[encryptedDataContainer.CipherText.Length];
 
             var aes = new System.Security.Cryptography.AesGcm(key);
-            aes.Decrypt(encryptedDataContainer.Nonce, encryptedDataContainer.CipherText, encryptedDataContainer.Tag, plainText,encryptedDataContainer.AssociatedData);
+            aes.Decrypt(encryptedDataContainer.Nonce, encryptedDataContainer.CipherText, encryptedDataContainer.Tag, plainText, encryptedDataContainer.AssociatedData);
 
             return plainText;
         }
