@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using FluentAssertions;
 using Xunit;
@@ -71,6 +73,137 @@ namespace EncryptionDemo.Sample.Test
 
             #endregion
         }
+        [Fact]
+        public void EncryptWithPassword()
+        {
+            #region Arange
 
+            var password = Guid.NewGuid().ToString();
+            var plain = Guid.NewGuid().ToString();
+
+            #endregion
+
+            #region Act
+
+            var cipherText = JavascriptObjectSigningAndEncryption.Encrypt(password, plain);
+
+            #endregion
+
+            #region Assert
+
+            outputHelper.WriteLine("Token: "+ cipherText);
+
+            plain.Should().NotBe(cipherText);
+
+            #endregion
+        }
+
+        [Fact]
+        public void DecryptWithPassword()
+        {
+            #region Arange
+
+            var password = Guid.NewGuid().ToString();
+            var plain = Guid.NewGuid().ToString();
+            var token = JavascriptObjectSigningAndEncryption.Encrypt(password, plain);
+
+            #endregion
+
+            #region Act
+
+            var decrypted = JavascriptObjectSigningAndEncryption.Decrypt(password, token);
+
+            #endregion
+
+            #region Assert
+
+            outputHelper.WriteLine("Token: "+ token);
+
+            plain.Should().NotBe(token);
+            decrypted.Should().Be(plain);
+
+            #endregion
+        }
+
+        // See https://github.com/dvsekhvalnov/jose-jwt/blob/e54de3bb706edf294053b4b86f0db47333d433ef/jose-jwt/crypto/ConcatKDF.cs#L43
+        [Fact(Skip = "Not yet implemented")]
+        public void EncryptWithEllipticCurve()
+        {
+            #region Arange
+
+            // see https://tools.ietf.org/html/rfc7518#section-6.2.1.1
+            var c = ECDiffieHellman.Create(ECCurve.NamedCurves.brainpoolP512r1);
+            var exportParameters = c.ExportParameters(true);
+            var plain = Guid.NewGuid().ToString();
+
+            #endregion
+
+            #region Act
+
+            var token = JavascriptObjectSigningAndEncryption.Encrypt(exportParameters, plain);
+
+            #endregion
+
+            #region Assert
+
+            outputHelper.WriteLine("Token: "+ token);
+
+            // TODO
+            plain.Should().NotBe(token);
+
+            #endregion
+        }
+
+        [Fact()]
+        public void EncryptWithRSA()
+        {
+            #region Arange
+
+            var rsa = RSA.Create(1024 * 4);
+            var plain = Guid.NewGuid().ToString();
+
+            #endregion
+
+            #region Act
+
+            var token = JavascriptObjectSigningAndEncryption.Encrypt(rsa, plain);
+
+            #endregion
+
+            #region Assert
+
+            outputHelper.WriteLine("Token: "+ token);
+
+            plain.Should().NotBe(token);
+
+            #endregion
+        }
+
+        [Fact()]
+        public void DecryptWithRSA()
+        {
+            #region Arange
+
+            var rsa = RSA.Create(1024 * 4);
+            var plain = Guid.NewGuid().ToString();
+            var token = JavascriptObjectSigningAndEncryption.Encrypt(rsa, plain);
+
+            #endregion
+
+            #region Act
+
+            var decypted = JavascriptObjectSigningAndEncryption.Decrypt(rsa, token);
+
+            #endregion
+
+            #region Assert
+
+            outputHelper.WriteLine("Token: " + token);
+
+            
+            plain.Should().Be(decypted);
+
+            #endregion
+        }
     }
 }
