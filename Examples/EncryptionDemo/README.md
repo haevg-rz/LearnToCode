@@ -9,7 +9,10 @@ Source: [https://docs.microsoft.com/en-us/dotnet/standard/security/cryptography-
 
 ## Guidance
 
-As guidance we will use the document "[BSI TR-02102 Cryptographic Mechanisms](https://www.bsi.bund.de/EN/Publications/TechnicalGuidelines/tr02102/tr02102_node.html)".
+As guidance we will use the document "[BSI TR-02102 Cryptographic Mechanisms](https://www.bsi.bund.de/EN/Publications/TechnicalGuidelines/tr02102/tr02102_node.html)" in version 2019-01
+and some documents from the US National Institute of Standards and Technology NIST.
+
+- [NIST SP 800-132 Recommendation for Password-Based Key Derivation: Part 1: Storage Applications](https://csrc.nist.gov/publications/detail/sp/800-132/final)
 
 ## Algorithm
 
