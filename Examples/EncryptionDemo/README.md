@@ -11,6 +11,8 @@ Source: [https://docs.microsoft.com/en-us/dotnet/standard/security/cryptography-
 
 As guidance we will use the document "[BSI TR-02102 Cryptographic Mechanisms](https://www.bsi.bund.de/EN/Publications/TechnicalGuidelines/tr02102/tr02102_node.html)".
 
+Additional there is a [Cryptographic Storage Cheat Sheet](https://owasp.org/www-project-cheat-sheets/cheatsheets/Cryptographic_Storage_Cheat_Sheet) from Open Web Application Security Project ([OWASP](https://owasp.org/)).
+
 ## Algorithm
 
 > You can select an algorithm for different reasons: for example, for data integrity, for data privacy, or to generate a key. Symmetric and hash algorithms are intended for protecting data for either integrity reasons (protect from change) or privacy reasons (protect from viewing). Hash algorithms are used primarily for data integrity.
