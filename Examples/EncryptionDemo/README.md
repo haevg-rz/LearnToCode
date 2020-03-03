@@ -9,7 +9,10 @@ Source: [https://docs.microsoft.com/en-us/dotnet/standard/security/cryptography-
 
 ## Guidance
 
-As guidance we will use the document "[BSI TR-02102 Cryptographic Mechanisms](https://www.bsi.bund.de/EN/Publications/TechnicalGuidelines/tr02102/tr02102_node.html)".
+As guidance we will use the document "[BSI TR-02102 Cryptographic Mechanisms](https://www.bsi.bund.de/EN/Publications/TechnicalGuidelines/tr02102/tr02102_node.html)" in version 2019-01
+and some documents from the US National Institute of Standards and Technology NIST.
+
+- [NIST SP 800-132 Recommendation for Password-Based Key Derivation: Part 1: Storage Applications](https://csrc.nist.gov/publications/detail/sp/800-132/final)
 
 Additional there is a [Cryptographic Storage Cheat Sheet](https://owasp.org/www-project-cheat-sheets/cheatsheets/Cryptographic_Storage_Cheat_Sheet) from Open Web Application Security Project ([OWASP](https://owasp.org/)).
 
@@ -41,66 +44,32 @@ You want to encrypt a file with a password, is this case you want to ensure data
 
 You want to encrypt a file with a password, is this case you want to ensure data privacy with e.g. Aes, data integrity with e.g. HMACSHA512 and generating a key  with RNGCryptoServiceProvider in case of RSA oder derive a key in case of ECDH. The cipher text should be signed with RSA or ECDsa.
 
+## Cryptographic primitives and Standards
+
+[Cryptographic primitives](https://en.wikipedia.org/wiki/Cryptographic_primitive) are well-established, low-level cryptographic algorithms that are frequently used to build cryptographic protocols for computer security systems. These routines include, but are not limited to, one-way hash functions and encryption functions.
+
+Cryptographic primitives, on their own, are quite limited. They cannot be considered, properly, to be a cryptographic system. For instance, a bare encryption algorithm will provide no authentication mechanism, nor any explicit message integrity checking. Only when combined in security protocols, can more than one security requirement be addressed. (See [Combining cryptographic primitives](https://en.wikipedia.org/wiki/Cryptographic_primitive#Combining_cryptographic_primitives))
+
+For developer without any specialization in cryptosystems it is safer to use standards or cryptographic protocols which combine cryptographic primitives to ensure safty.
+
+E.g. Cryptographic Message Syntax (CMS) for cryptographically protected messages or PGP, JWT, TLS, Signal Protocol.
+
+[Any never ever invent your own crypto whatever!](https://security.stackexchange.com/questions/18197/why-shouldnt-we-roll-our-own) Use only trusted cryptography libraries!
+
 ## Features
 
-### Perfect Forward Secrecy (PFS)
+Here are some features that you could implement.
 
-> An encryption system has the property of forward secrecy if plain-text (decrypted) inspection of the data exchange that occurs during key agreement phase of session initiation does not reveal the key that was used to encrypt the remainder of the session.
-
-Source: [https://en.wikipedia.org/wiki/Forward_secrecy](https://en.wikipedia.org/wiki/Forward_secrecy)
-
-### Authenticated encryption
-
-> Authenticated encryption (AE) and authenticated encryption with associated data (AEAD) are forms of encryption which simultaneously assure the confidentiality and authenticity of data.
-
-Source: https://en.wikipedia.org/wiki/Authenticated_encryption
-
-### Homomorphic encryption
-
-> Homomorphic encryption is a form of encryption that allows computation on ciphertexts, generating an encrypted result which, when decrypted, matches the result of the operations as if they had been performed on the plaintext.
-
-> Homomorphic encryption can be used for privacy-preserving outsourced storage and computation. This allows data to be encrypted and out-sourced to commercial cloud environments for processing, all while encrypted. In highly regulated industries, such as health care, homomorphic encryption can be used to enable new services by removing privacy barriers inhibiting data sharing. For example, predictive analytics in health care can be hard to apply due to medical data privacy concerns, but if the predictive analytics service provider can operate on encrypted data instead, these privacy concerns are diminished.
-
-Source: https://en.wikipedia.org/wiki/Homomorphic_encryption
-
-### Deniable Authentication
-
-> In cryptography, deniable authentication refers to message authentication between a set of participants where the participants themselves can be confident in the authenticity of the messages, but it cannot be proved to a third party after the event.
-
-Source: https://en.wikipedia.org/wiki/Deniable_authentication
-
-### Deniable encryption
-
-> In cryptography and steganography, plausibly deniable encryption describes encryption techniques where the existence of an encrypted file or message is deniable in the sense that an adversary cannot prove that the plaintext data exists
-
-Source: https://en.wikipedia.org/wiki/Deniable_encryption
-
-### Malleability 
-
-> Malleability is a property of some cryptographic algorithms.[1] An encryption algorithm is "malleable" if it is possible to transform a ciphertext into another ciphertext which decrypts to a related plaintext. 
-
-Source: https://en.wikipedia.org/wiki/Malleability_(cryptography)
-
-### Plausible deniability
-
-> In cryptography, deniable encryption may be used to describe steganographic techniques, where the very existence of an encrypted file or message is deniable in the sense that an adversary cannot prove that an encrypted message exists. In this case the system is said to be 'fully undetectable' (FUD)
-
-Source: https://en.wikipedia.org/wiki/Plausible_deniability
-
-### Post-Quantum Cryptography - Quantum Resistance
-
-> Post quantum algorithms are also called "quantum resistant", because it is not known or provable that there will not be potential future quantum attacks against them.
-
-> The need for post-quantum cryptography arises from the fact that many popular encryption and signature schemes (schemes based on **ECC and RSA**) can be broken using Shor's algorithm for factoring and computing discrete logarithms on a quantum computer.[...]
-
-Source: [https://en.wikipedia.org/wiki/Quantum_cryptography](https://en.wikipedia.org/wiki/Quantum_cryptography)
-
-#### Symmetric key quantum resistance
-
-> Provided one uses sufficiently large key sizes, the symmetric key cryptographic systems like **AES** and SNOW 3G are already **resistant to attack by a quantum computer**. [...]  
-> As a general rule, for 128 bits of security in a symmetric-key-based system, one can **safely use key sizes of 256 bits**. The best quantum attack against generic symmetric-key systems is an application of Grover's algorithm, which requires work proportional to the square root of the size of the key space. [...]
-
-Source: [https://en.wikipedia.org/wiki/Post-quantum_cryptography#Symmetric_key_quantum_resistance](https://en.wikipedia.org/wiki/Post-quantum_cryptography#Symmetric_key_quantum_resistance)
+- [Perfect Forward Secrecy (PFS)](https://en.wikipedia.org/wiki/Forward_secrecy)
+- [Authenticated encryption](https://en.wikipedia.org/wiki/Authenticated_encryption)
+- [Homomorphic encryption](https://en.wikipedia.org/wiki/Homomorphic_encryption)
+- [Deniable Authentication](https://en.wikipedia.org/wiki/Deniable_authentication)
+- [Deniable encryption](https://en.wikipedia.org/wiki/Deniable_encryption)
+- [Malleability](https://en.wikipedia.org/wiki/Malleability_(cryptography))
+- [Plausible deniability](https://en.wikipedia.org/wiki/Plausible_deniability)
+- [Post-Quantum Cryptography - Quantum Resistance](https://en.wikipedia.org/wiki/Quantum_cryptography)
+- [Symmetric key quantum resistance](https://en.wikipedia.org/wiki/Post-quantum_cryptography#Symmetric_key_quantum_resistance)
+- [Crypto-agility](https://en.wikipedia.org/wiki/Crypto-agility)
 
 ## Usage of cryptographic primitive
 
