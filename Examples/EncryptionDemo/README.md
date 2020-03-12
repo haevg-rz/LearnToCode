@@ -7,6 +7,9 @@
 > The .NET Framework provides implementations of many standard cryptographic algorithms. These algorithms are easy to use and have the safest possible default properties. In addition, the .NET Framework cryptography model of object inheritance, stream design, and configuration is extremely extensible.  
 Source: [https://docs.microsoft.com/en-us/dotnet/standard/security/cryptography-model](https://docs.microsoft.com/en-us/dotnet/standard/security/cryptography-model)
 
+> **"Schneier's Law"** "Anyone can design a cipher that he himself cannot break. This is why you should uniformly distrust amateur cryptography, and why you should only use published algorithms that have withstood broad cryptanalysis. All cryptographers know this, but non-cryptographers do not. And this is why we repeatedly see bad amateur cryptography in fielded systems."
+> [Amateurs Produce Amateur Cryptography](https://www.schneier.com/blog/archives/2015/05/amateurs_produc.html)
+
 ## Guidance
 
 As guidance we will use the document "[BSI TR-02102 Cryptographic Mechanisms](https://www.bsi.bund.de/EN/Publications/TechnicalGuidelines/tr02102/tr02102_node.html)" in version 2019-01
@@ -16,17 +19,28 @@ and some documents from the US National Institute of Standards and Technology NI
 
 Additional there is a [Cryptographic Storage Cheat Sheet](https://owasp.org/www-project-cheat-sheets/cheatsheets/Cryptographic_Storage_Cheat_Sheet) from Open Web Application Security Project ([OWASP](https://owasp.org/)).
 
+## Quick Start
+
+You want to understand how to encrypt data with a password in the .NET Framework: Take a look at `Rfc2898DeriveBytes` and `AES-CGM` or a protocol like CMS or JWE.
+
+You want to understand how to encrypt data using a public key: Take a look at protocols like CMS or JWE and [hybrid cryptosystems](https://en.wikipedia.org/wiki/Hybrid_cryptosystem) (e.g. `ECDiffieHellman` + `ECDsa` + `AES-CGM` or `RSA` + `AES-CGM`).
+
 ## Algorithm
 
 > You can select an algorithm for different reasons: for example, for data integrity, for data privacy, or to generate a key. Symmetric and hash algorithms are intended for protecting data for either integrity reasons (protect from change) or privacy reasons (protect from viewing). Hash algorithms are used primarily for data integrity.
 
 - Data privacy:
   - Aes
+  - ChaCha20
 - Data integrity:
-  - HMACSHA256
-  - HMACSHA512
+  - MAC
+    - HMACSHA256
+    - HMACSHA512
+  - Authenticated Encryption with Additional Data ciphers
 - Digital signature:
   - ECDsa
+  - RSA
+- Key encapsulation
   - RSA
 - Key exchange:
   - ECDiffieHellman
@@ -77,6 +91,10 @@ Here are some features that you could implement.
 
 ### RSA
 
+> RSA is a deterministic encryption algorithm! (see [Attacks against plain RSA](https://en.wikipedia.org/wiki/RSA_(cryptosystem)#Attacks_against_plain_RSA))
+
+You should not use RSA for plain encryption, the proper use of RSA is KEM (key encapsulation mechanism) where a random secret is encrypted or for digital signatures.
+
 ### ECC
 
 ### Combination of cryptographic primitive
@@ -90,3 +108,7 @@ Here are some features that you could implement.
 ### JavaScript Object Signing and Encryption (JOSE)
 
 ### Cryptographic Message Syntax (CMS, PKCS#7)
+
+## Links
+
+- [blog.cloudflare.com - It takes two to ChaCha (Poly)](https://blog.cloudflare.com/it-takes-two-to-chacha-poly/)
