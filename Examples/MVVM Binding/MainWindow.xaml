@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MVVM_Binding"
         mc:Ignorable="d"
+        DataContext="{StaticResource ViewModel}"
         Title="MainWindow" Height="450" Width="800">
     <Window.Resources>
         <Style x:Key="TextBoxStyle" TargetType="FrameworkElement">
