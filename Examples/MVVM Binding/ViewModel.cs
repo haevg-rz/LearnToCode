@@ -12,6 +12,7 @@ namespace MVVM_Binding
         public ViewModel()
         {
             this.GoCommand = new Command(() => Content3TextBlock = Content3);
+            this.AddCommand = new Command(() => Items.Add(new Item(){Value = NewItem}));
             this.Items = new List<Item>()
             {
                 new Item(){Value = "Erster!"},
@@ -50,7 +51,10 @@ namespace MVVM_Binding
             }
         }
 
+        public string NewItem { get; set; }
+
         public ICommand GoCommand { get; set; }
+        public ICommand AddCommand { get; set; }
 
         public List<Item> Items { get; set; }
 

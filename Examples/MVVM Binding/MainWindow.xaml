@@ -25,6 +25,7 @@
             <RowDefinition />
             <RowDefinition />
             <RowDefinition />
+            <RowDefinition />
         </Grid.RowDefinitions>
         <TextBox Grid.Column="0" Grid.Row="0" Style="{StaticResource TextBoxStyle}"
                  Text="{Binding Content1, UpdateSourceTrigger=PropertyChanged}" />
@@ -53,5 +54,11 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
+
+        <TextBox Grid.Column="0" Grid.Row="4" Style="{StaticResource TextBoxStyle}"
+        Text="{Binding NewItem, UpdateSourceTrigger=PropertyChanged}" />
+
+        <Button Grid.Column="1" Grid.Row="4" Content="Add" Style="{StaticResource TextBoxStyle}" Command="{Binding AddCommand}"></Button>
+
     </Grid>
 </Window>
