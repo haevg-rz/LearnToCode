@@ -6,6 +6,13 @@
         xmlns:local="clr-namespace:MVVM_Binding"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <Style x:Key="TextBoxStyle" TargetType="FrameworkElement">
+            <Setter Property="Margin" Value="10"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -18,14 +25,14 @@
             <RowDefinition />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <TextBox Grid.Column="0" Grid.Row="0"></TextBox>
-        <TextBox Grid.Column="0" Grid.Row="1"></TextBox>
-        <TextBox Grid.Column="0" Grid.Row="2"></TextBox>
+        <TextBox Grid.Column="0" Grid.Row="0" Style="{StaticResource TextBoxStyle}"></TextBox>
+        <TextBox Grid.Column="0" Grid.Row="1" Style="{StaticResource TextBoxStyle}"></TextBox>
+        <TextBox Grid.Column="0" Grid.Row="2" Style="{StaticResource TextBoxStyle}"></TextBox>
 
-        <Button  Grid.Column="1" Grid.Row="2" Content="Do"></Button>
+        <Button  Grid.Column="1" Grid.Row="2" Content="Do" Style="{StaticResource TextBoxStyle}"></Button>
 
-        <TextBox Grid.Column="2" Grid.Row="0" ></TextBox>
-        <TextBlock Grid.Column="2" Grid.Row="1" ></TextBlock>
-        <TextBlock Grid.Column="2" Grid.Row="2" ></TextBlock>
+        <TextBox Grid.Column="2" Grid.Row="0" Style="{StaticResource TextBoxStyle}" ></TextBox>
+        <TextBlock Grid.Column="2" Grid.Row="1" Style="{StaticResource TextBoxStyle}" ></TextBlock>
+        <TextBlock Grid.Column="2" Grid.Row="2" Style="{StaticResource TextBoxStyle}"></TextBlock>
     </Grid>
 </Window>
