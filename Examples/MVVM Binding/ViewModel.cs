@@ -8,8 +8,19 @@ namespace MVVM_Binding
 {
     public class ViewModel : INotifyPropertyChanged
     {
+        
         public string Content1 { get; set; } = "Hallo";
-        public string Content2 { get; set; }
+
+        private string content2;
+        public string Content2
+        {
+            get => content2;
+            set
+            {
+                content2 = value;
+                OnPropertyChanged(nameof(Content2TextBlock));
+            }
+        }
 
         public string Content2TextBlock
         {
