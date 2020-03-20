@@ -12,7 +12,14 @@ namespace MVVM_Binding
         public ViewModel()
         {
             this.GoCommand = new Command(() => Content3TextBlock = Content3);
-            this.AddCommand = new Command(() => Items.Add(new Item(){Value = NewItem}));
+            this.AddCommand = new Command(() =>
+            {
+                Items.Add(new Item() {Value = NewItem});
+                Items = new List<Item>(Items);
+                
+                OnPropertyChanged(nameof(Items));
+            });
+
             this.Items = new List<Item>()
             {
                 new Item(){Value = "Erster!"},
@@ -23,6 +30,7 @@ namespace MVVM_Binding
 
         private string content2;
         private string content3TextBlock = "How is there?";
+        private List<Item> items;
 
         public string Content2
         {
@@ -56,7 +64,11 @@ namespace MVVM_Binding
         public ICommand GoCommand { get; set; }
         public ICommand AddCommand { get; set; }
 
-        public List<Item> Items { get; set; }
+        public List<Item> Items
+        {
+            get => items;
+            set => items = value;
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
