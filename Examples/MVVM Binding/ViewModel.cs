@@ -16,6 +16,8 @@ namespace MVVM_Binding
         public string Content1 { get; set; } = "Hallo";
 
         private string content2;
+        private string content3TextBlock = "How is there?";
+
         public string Content2
         {
             get => content2;
@@ -32,7 +34,16 @@ namespace MVVM_Binding
         }
 
         public string Content3 { get; set; } = "Knock Knock";
-        public string Content3TextBlock { get; set; } = "How is there?";
+
+        public string Content3TextBlock
+        {
+            get => content3TextBlock;
+            set
+            {
+                content3TextBlock = value;
+                OnPropertyChanged(nameof(Content3TextBlock));
+            }
+        }
 
         public ICommand GoCommand { get; set; }
 
