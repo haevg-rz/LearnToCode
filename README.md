@@ -12,4 +12,6 @@ Learning assets from our students and trainees.
 6. [Push - Send notifications to Android and iPhone](Examples/UsingApiForPush/README.md)
 7. [Using JSON configuration files](Examples/JsonConfigFiles/README.md)
 8. [Mocking](Examples/Mock/README.md)
-8. [Binary Search](Examples/BinarySearch/README.md)
+9. [Binary Search](Examples/BinarySearch/README.md)
+10. [MVVM Bindings](Examples/MVVM%20Binding/README.md) :hammer:
+11. [Encryption](Examples/EncryptionDemo/README.md) :hammer:
