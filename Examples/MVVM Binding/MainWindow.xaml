@@ -46,12 +46,12 @@
         <ItemsControl Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="3" ItemsSource="{Binding Items}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel>
-                        <TextBlock Text="{Binding}" />
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox Text="{Binding Value}" MinWidth="150" />
+                        <TextBox Text="{Binding Timestamp}" />
                     </StackPanel>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
-
     </Grid>
 </Window>
