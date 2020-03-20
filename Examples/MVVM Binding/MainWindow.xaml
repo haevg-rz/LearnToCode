@@ -27,13 +27,13 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <TextBox Grid.Column="0" Grid.Row="0" Style="{StaticResource TextBoxStyle}" Text="{Binding Content1, UpdateSourceTrigger=PropertyChanged}" />
-        <TextBox Grid.Column="0" Grid.Row="1" Style="{StaticResource TextBoxStyle}"></TextBox>
+        <TextBox Grid.Column="0" Grid.Row="1" Style="{StaticResource TextBoxStyle}" Text="{Binding Content2, UpdateSourceTrigger=PropertyChanged}" />
         <TextBox Grid.Column="0" Grid.Row="2" Style="{StaticResource TextBoxStyle}"></TextBox>
 
         <Button  Grid.Column="1" Grid.Row="2" Content="Do" Style="{StaticResource TextBoxStyle}"></Button>
 
         <TextBox Grid.Column="2" Grid.Row="0" Style="{StaticResource TextBoxStyle}" Text="{Binding Content1, Mode=OneWay}" ></TextBox>
-        <TextBlock Grid.Column="2" Grid.Row="1" Style="{StaticResource TextBoxStyle}" ></TextBlock>
+        <TextBlock Grid.Column="2" Grid.Row="1" Style="{StaticResource TextBoxStyle}" Text="{Binding Content2TextBlock}" ></TextBlock>
         <TextBlock Grid.Column="2" Grid.Row="2" Style="{StaticResource TextBoxStyle}"></TextBlock>
     </Grid>
 </Window>
