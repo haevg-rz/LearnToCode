@@ -9,9 +9,9 @@
         Title="MainWindow" Height="450" Width="600">
     <Window.Resources>
         <Style x:Key="TextBoxStyle" TargetType="FrameworkElement">
-            <Setter Property="Margin" Value="10"></Setter>
-            <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
-            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="Margin" Value="10" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="VerticalAlignment" Value="Center" />
         </Style>
     </Window.Resources>
     <Grid>
@@ -26,14 +26,32 @@
             <RowDefinition />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <TextBox Grid.Column="0" Grid.Row="0" Style="{StaticResource TextBoxStyle}" Text="{Binding Content1, UpdateSourceTrigger=PropertyChanged}" />
-        <TextBox Grid.Column="0" Grid.Row="1" Style="{StaticResource TextBoxStyle}" Text="{Binding Content2, UpdateSourceTrigger=PropertyChanged}" />
-        <TextBox Grid.Column="0" Grid.Row="2" Style="{StaticResource TextBoxStyle}" Text="{Binding Content3, UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox Grid.Column="0" Grid.Row="0" Style="{StaticResource TextBoxStyle}"
+                 Text="{Binding Content1, UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox Grid.Column="0" Grid.Row="1" Style="{StaticResource TextBoxStyle}"
+                 Text="{Binding Content2, UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox Grid.Column="0" Grid.Row="2" Style="{StaticResource TextBoxStyle}"
+                 Text="{Binding Content3, UpdateSourceTrigger=PropertyChanged}" />
 
-        <Button  Grid.Column="1" Grid.Row="2" Content="Do" Style="{StaticResource TextBoxStyle}" Command="{Binding GoCommand}" />
+        <Button Grid.Column="1" Grid.Row="2" Content="Do" Style="{StaticResource TextBoxStyle}"
+                Command="{Binding GoCommand}" />
 
-        <TextBox Grid.Column="2" Grid.Row="0" Style="{StaticResource TextBoxStyle}" Text="{Binding Content1, Mode=OneWay}" />
-        <TextBlock Grid.Column="2" Grid.Row="1" Style="{StaticResource TextBoxStyle}" Text="{Binding Content2TextBlock}" />
-        <TextBlock Grid.Column="2" Grid.Row="2" Style="{StaticResource TextBoxStyle}" Text="{Binding Content3TextBlock}" />
+        <TextBox Grid.Column="2" Grid.Row="0" Style="{StaticResource TextBoxStyle}"
+                 Text="{Binding Content1, Mode=OneWay}" />
+        <TextBlock Grid.Column="2" Grid.Row="1" Style="{StaticResource TextBoxStyle}"
+                   Text="{Binding Content2TextBlock}" />
+        <TextBlock Grid.Column="2" Grid.Row="2" Style="{StaticResource TextBoxStyle}"
+                   Text="{Binding Content3TextBlock}" />
+
+        <ItemsControl Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="3" ItemsSource="{Binding Items}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
     </Grid>
 </Window>

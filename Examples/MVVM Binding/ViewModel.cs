@@ -12,6 +12,11 @@ namespace MVVM_Binding
         public ViewModel()
         {
             this.GoCommand = new Command(() => Content3TextBlock = Content3);
+            this.Items = new List<Item>()
+            {
+                new Item(){Value = "Erster!"},
+                new Item(){Value = "Zweiter!"},
+            };
         }
         public string Content1 { get; set; } = "Hallo";
 
@@ -47,11 +52,24 @@ namespace MVVM_Binding
 
         public ICommand GoCommand { get; set; }
 
+        public List<Item> Items { get; set; }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }
+
+    public class Item
+    {
+        public string Value { get; set; }
+        public string Timestamp { get; set; } = DateTime.Now.ToString();
+
+        public override string ToString()
+        {
+            return "MyToString: " + Value + ", " + Timestamp;
         }
     }
 
