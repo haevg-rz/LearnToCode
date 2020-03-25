@@ -13,4 +13,4 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build a solutions
-      run: Get-ChildItem -Path . -Include *.sln -Recurse | %{ dotnet build $_.FullName }
+      run: $buildError = $false; Get-ChildItem -Path . -Include *.sln -Recurse | %{ dotnet build $_.FullName; if( $LASTEXITCODE -ne 0){$buildError=$true}}; if($buildError -eq $true){Write-Host "Error!"; Exit -1}
