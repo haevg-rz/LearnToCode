@@ -1,5 +1,7 @@
 # LearnToCode
 
+![CI](https://github.com/haevg-rz/LearnToCode/workflows/CI/badge.svg)
+
 Learning assets from our students and trainees.
 
 ## Examples
