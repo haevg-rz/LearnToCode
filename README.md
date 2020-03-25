@@ -15,3 +15,29 @@ Learning assets from our students and trainees.
 9. [Binary Search](Examples/BinarySearch/README.md)
 10. [MVVM Bindings](Examples/MVVM%20Binding/README.md) :hammer: (Under construction)
 11. [Encryption](Examples/EncryptionDemo/README.md) :hammer: (Under construction)
+
+## Contribute
+
+How these pattern to create a visual studio solution.
+
+### Create a WPF Application
+
+Go in the new folder for your example.
+
+```cmd
+dotnet new sln
+dotnet new wpf
+dotnet sln add .
+dotnet build
+```
+
+### Create a class lib
+
+Go in the new folder for your example.
+
+```cmd
+dotnet new sln
+dotnet new classlib
+dotnet sln add .
+dotnet build
+```
