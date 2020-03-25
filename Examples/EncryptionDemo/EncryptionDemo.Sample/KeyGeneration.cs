@@ -17,16 +17,16 @@ namespace EncryptionDemo.Sample
         /// <summary>
         /// The salt will have the same size as the HashSize of the used HashAlgorithm SHA256. The salt shall be at least 128 bits after the NIST Special Publication 800-132.
         /// </summary>
-        private static readonly int SaltSizeInBits = SHA256.Create().HashSize;
+        public static readonly int SaltSizeInBits = SHA256.Create().HashSize;
         /// <summary>
         /// SHA256 is one of the recommended hash function, see BSI TR-02102-1, 4. Hash functions, Table 4.1.: Recommended hash functions
         /// </summary>
-        private static readonly HashAlgorithmName HashAlgorithmSha256 = HashAlgorithmName.SHA256;
+        public static readonly HashAlgorithmName HashAlgorithmSha256 = HashAlgorithmName.SHA256;
 
         /// <summary>
         /// This implementation uses a iteration count of 100.000, which seems to be a number which is wildly used in strong systems. A minimum of 1.000 is recommended after the NIST Special Publication 800-132 and the RFC 2898.
         /// </summary>
-        private const int Iterations = 100_000;
+        public const int Iterations = 100_000;
 
         /// <summary>
         /// 
