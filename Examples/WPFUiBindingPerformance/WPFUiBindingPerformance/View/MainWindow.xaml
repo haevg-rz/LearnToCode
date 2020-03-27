@@ -1,0 +1,111 @@
+﻿<Window x:Class="WPFUiBindingPerformance.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800"
+        WindowState="Maximized"
+        DataContext="{Binding Source={StaticResource Locator}, Path=Main}">
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closing">
+            <i:InvokeCommandAction Command="{Binding ClosingCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Row="0" Grid.ColumnSpan="3">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock>Amount of Properties to generate: </TextBlock>
+                <TextBox Width="50" Text="{Binding Path=AmountOfProperties, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <Button Margin="20,0,0,0" Content="ClearAllData" Command="{Binding Path=ClearAllDataCommand}"></Button>
+                <TextBlock Margin="20,0,0,0">
+                    <Run Text="Time needed to create Data and fill the collection: "></Run>
+                    <Run Text="{Binding Path=TimeToCreateDataAndFillTheCollection}"></Run>
+                    <Run Text="s"></Run>
+                </TextBlock>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1" Column="0">
+            <StackPanel>
+                <TextBlock HorizontalAlignment="Center">NestedProperties</TextBlock>
+                <Button Content="LoadData" Width="80" Height="20" Command="{Binding Path=LoadNestedTypeCommand}"></Button>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1" Column="1">
+            <StackPanel>
+                <TextBlock HorizontalAlignment="Center">NormalProperties</TextBlock>
+                <Button Content="LoadData" Width="80" Height="20" Command="{Binding Path=LoadNonNestedTypeCommand}"></Button>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1" Column="2">
+            <StackPanel>
+                <TextBlock HorizontalAlignment="Center">SilentObservableCollection</TextBlock>
+                <Button Content="LoadData" Width="80" Height="20" Command="{Binding Path=LoadSilentCollectionCommand}"></Button>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="2" Grid.Column="0">
+            <ItemsControl ItemsSource="{Binding Path=NestedList}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Expander IsExpanded="True">
+                            <Expander.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Path=TypeName}" FontWeight="Bold" FontSize="15"></TextBlock>
+                                    <TextBlock Text="Anzahl der Properties: " Margin="10,0,0,0" VerticalAlignment="Center"></TextBlock>
+                                    <TextBlock Text="{Binding Path=NestedPropertiesList.Count}" VerticalAlignment="Center"></TextBlock>
+                                </StackPanel>
+                            </Expander.Header>
+                            <ListView ItemsSource="{Binding Path=NestedPropertiesList}">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Path=ID}" Width="Auto"></GridViewColumn>
+                                        <GridViewColumn Header="State" DisplayMemberBinding="{Binding Path=State}" Width="Auto"></GridViewColumn>
+                                        <GridViewColumn Header="IsCrucial" DisplayMemberBinding="{Binding Path=IsCrucial}" Width="Auto"></GridViewColumn>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                        </Expander>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Grid>
+        <Grid Grid.Row="2" Grid.Column="1">
+            <ListView ItemsSource="{Binding Path=NonNestedList}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="TypeName" DisplayMemberBinding="{Binding Path=TypeName}" Width="Auto"></GridViewColumn>
+                        <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Path=ID}" Width="Auto"></GridViewColumn>
+                        <GridViewColumn Header="State" DisplayMemberBinding="{Binding Path=State}" Width="Auto"></GridViewColumn>
+                        <GridViewColumn Header="IsCrucial" DisplayMemberBinding="{Binding Path=IsCrucial}" Width="Auto"></GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+        <Grid Grid.Row="2" Grid.Column="2">
+            <ListView ItemsSource="{Binding Path=SilentList}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="TypeName" DisplayMemberBinding="{Binding Path=TypeName}" Width="Auto"></GridViewColumn>
+                        <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Path=ID}" Width="Auto"></GridViewColumn>
+                        <GridViewColumn Header="State" DisplayMemberBinding="{Binding Path=State}" Width="Auto"></GridViewColumn>
+                        <GridViewColumn Header="IsCrucial" DisplayMemberBinding="{Binding Path=IsCrucial}" Width="Auto"></GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+    </Grid>
+</Window>
