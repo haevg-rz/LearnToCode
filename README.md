@@ -18,6 +18,7 @@ Learning assets from our students and trainees.
 10. [MVVM Bindings](Examples/MVVM%20Binding/README.md) :hammer: (Under construction)
 11. [Encryption](Examples/EncryptionDemo/README.md) :hammer: (Under construction)
 12. [Gherkin](Examples/GherkinExample/README.md)
+13. [WPFUiBindingPerformance](Examples/WPFUiBindingPerformance/README.md)
 
 ## Contribute
 
