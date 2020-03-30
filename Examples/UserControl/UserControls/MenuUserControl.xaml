@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="UserControl.UserControls.MenuUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:userControl="clr-namespace:UserControl"
+             mc:Ignorable="d" Background="Beige"
+             d:DataContext="{Binding Path=ViewModel,Source={StaticResource ViewModelLocator}}" Height="244" Width="133">
+    <StackPanel>
+        <StackPanel.Resources>
+            <Style x:Key="ButtonStyle" TargetType="Button">
+                <Setter Property="Margin" Value="5" />
+                <Setter Property="Padding" Value="3" />
+            </Style>
+        </StackPanel.Resources>
+        <TextBlock Text="Menu" HorizontalAlignment="Center" />
+
+        <Button Content="Start" Style="{StaticResource ButtonStyle}" Command="{Binding StartCommand}" />
+        <Button Content="Stop" Style="{StaticResource ButtonStyle}" Command="{Binding StopCommand}" />
+
+        <Button Content="Add Employee" Style="{StaticResource ButtonStyle}" Command="{Binding AddCommand}"
+                CommandParameter="{x:Type userControl:Employee}" />
+        <Button Content="Add Customer" Style="{StaticResource ButtonStyle}" Command="{Binding AddCommand}"
+                CommandParameter="{x:Type userControl:Customer}" />
+
+        <Button Content="Clear" Style="{StaticResource ButtonStyle}" Command="{Binding ClearCommand}" />
+
+        <TextBlock Text="{Binding Contacts.Count, StringFormat=Count: {0}}" HorizontalAlignment="Center" />
+    </StackPanel>
+</UserControl>

@@ -1,0 +1,90 @@
+﻿<Window x:Class="UserControl.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UserControl"
+        xmlns:userControls="clr-namespace:UserControl.UserControls"
+        mc:Ignorable="d"
+        Title="UserControl"
+        DataContext="{Binding Path=ViewModel, Source={StaticResource ViewModelLocator} }"
+        Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <!-- Simple example for the use of user controls -->
+        <StackPanel>
+            <StackPanel.Resources>
+                <Style x:Key="ButtonStyle" TargetType="Button">
+                    <Setter Property="Margin" Value="5" />
+                    <Setter Property="Padding" Value="3" />
+                </Style>
+            </StackPanel.Resources>
+            <TextBlock Text="Menu" HorizontalAlignment="Center" />
+
+            <Button Content="Start" Style="{StaticResource ButtonStyle}" Command="{Binding StartCommand}" />
+            <Button Content="Stop" Style="{StaticResource ButtonStyle}" Command="{Binding StopCommand}" />
+
+            <Button Content="Add Employee" Style="{StaticResource ButtonStyle}" Command="{Binding AddCommand}"
+                    CommandParameter="{x:Type local:Employee}" />
+            <Button Content="Add Customer" Style="{StaticResource ButtonStyle}" Command="{Binding AddCommand}"
+                    CommandParameter="{x:Type local:Customer}" />
+
+            <Button Content="Clear" Style="{StaticResource ButtonStyle}" Command="{Binding ClearCommand}" />
+
+            <TextBlock Text="{Binding Contacts.Count, StringFormat=Count: {0}}" HorizontalAlignment="Center" />
+        </StackPanel>
+
+        <!-- Simple example for the use of user controls -->
+        <userControls:MenuUserControl Grid.Column="1" />
+
+        <!-- Simple example with ItemsControl.ItemTemplate for the use of user controls -->
+        <ItemsControl Grid.Row="0" Grid.Column="2" ItemsSource="{Binding Contacts}">
+            <ItemsControl.Template>
+                <ControlTemplate>
+                    <ScrollViewer>
+                        <ItemsPresenter />
+                    </ScrollViewer>
+                </ControlTemplate>
+            </ItemsControl.Template>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="Gray" BorderThickness="0.5" Margin="5" Padding="2.5">
+                        <StackPanel>
+                            <TextBlock Text="{Binding Name}" />
+                            <TextBlock Text="{Binding BirthDate}" />
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <ItemsControl Grid.Row="0" Grid.Column="3" ItemsSource="{Binding Contacts}">
+            <ItemsControl.Template>
+                <ControlTemplate>
+                    <ScrollViewer>
+                        <ItemsPresenter />
+                    </ScrollViewer>
+                </ControlTemplate>
+            </ItemsControl.Template>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <userControls:ContactUserControl />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <userControls:WrapPanelUserControl Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"
+                                           WrapItems="{Binding Contacts}" />
+
+    </Grid>
+</Window>
