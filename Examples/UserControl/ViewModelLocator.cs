@@ -10,12 +10,10 @@ namespace UserControl
         public ViewModelLocator()
         {
         }
+
         public ViewModel ViewModel
         {
-            get
-            {
-                return new ViewModel();
-            }
+            get { return new ViewModel(); }
         }
     }
 }

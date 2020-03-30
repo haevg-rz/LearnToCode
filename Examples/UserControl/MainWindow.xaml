@@ -12,7 +12,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition  />
+            <RowDefinition />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -24,26 +24,28 @@
         <!-- Simple example for the use of user controls -->
         <StackPanel>
             <StackPanel.Resources>
-                    <Style x:Key="ButtonStyle" TargetType="Button">
-                        <Setter Property="Margin" Value="5" />
-                        <Setter Property="Padding" Value="3" />
-                    </Style>
-                </StackPanel.Resources>
-                <TextBlock Text="Menu" HorizontalAlignment="Center" />
-                
-                <Button Content="Start" Style="{StaticResource ButtonStyle}" Command="{Binding StartCommand}" />
-                <Button Content="Stop" Style="{StaticResource ButtonStyle}" Command="{Binding StopCommand}" />
-                
-                <Button Content="Add Employee" Style="{StaticResource ButtonStyle}" Command="{Binding AddCommand}" CommandParameter="{x:Type local:Employee}"/>
-                <Button Content="Add Customer" Style="{StaticResource ButtonStyle}" Command="{Binding AddCommand}" CommandParameter="{x:Type local:Customer}" />
-                
-                <Button Content="Clear" Style="{StaticResource ButtonStyle}" Command="{Binding ClearCommand}" />
+                <Style x:Key="ButtonStyle" TargetType="Button">
+                    <Setter Property="Margin" Value="5" />
+                    <Setter Property="Padding" Value="3" />
+                </Style>
+            </StackPanel.Resources>
+            <TextBlock Text="Menu" HorizontalAlignment="Center" />
 
-                <TextBlock Text="{Binding Contacts.Count, StringFormat=Count: {0}}" HorizontalAlignment="Center" />
+            <Button Content="Start" Style="{StaticResource ButtonStyle}" Command="{Binding StartCommand}" />
+            <Button Content="Stop" Style="{StaticResource ButtonStyle}" Command="{Binding StopCommand}" />
+
+            <Button Content="Add Employee" Style="{StaticResource ButtonStyle}" Command="{Binding AddCommand}"
+                    CommandParameter="{x:Type local:Employee}" />
+            <Button Content="Add Customer" Style="{StaticResource ButtonStyle}" Command="{Binding AddCommand}"
+                    CommandParameter="{x:Type local:Customer}" />
+
+            <Button Content="Clear" Style="{StaticResource ButtonStyle}" Command="{Binding ClearCommand}" />
+
+            <TextBlock Text="{Binding Contacts.Count, StringFormat=Count: {0}}" HorizontalAlignment="Center" />
         </StackPanel>
 
         <!-- Simple example for the use of user controls -->
-           <userControls:MenuUserControl Grid.Column="1" />
+        <userControls:MenuUserControl Grid.Column="1" />
 
         <!-- Simple example with ItemsControl.ItemTemplate for the use of user controls -->
         <ItemsControl Grid.Row="0" Grid.Column="2" ItemsSource="{Binding Contacts}">
@@ -81,7 +83,8 @@
             </ItemsControl.ItemTemplate>
         </ItemsControl>
 
-        <userControls:WrapPanelUserControl Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" WrapItems="{Binding Contacts}" />
+        <userControls:WrapPanelUserControl Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"
+                                           WrapItems="{Binding Contacts}" />
 
     </Grid>
 </Window>

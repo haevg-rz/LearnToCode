@@ -88,12 +88,12 @@ namespace UserControl
 
     public class Customer : ContactBase, IContact
     {
-        public DateTime LastOrder { get; set; }
+        public DateTime LastOrder { get; set; } = DateTime.Now.AddYears(-2).AddDays(new Random().Next(0, 360 * 2)).Date;
     }
 
     public class Employee : ContactBase, IContact
     {
-        public double Salery { get; set; }
+        public double Salery { get; set; } = new Random().Next(1_000, 10_000);
     }
 
     public class ContactBase
