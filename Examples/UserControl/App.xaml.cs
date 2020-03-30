@@ -13,5 +13,6 @@ namespace UserControl
     /// </summary>
     public partial class App : Application
     {
+
     }
 }

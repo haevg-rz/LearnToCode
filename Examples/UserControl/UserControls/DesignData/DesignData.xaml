@@ -1,0 +1,17 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:userControl="clr-namespace:UserControl"
+                    xmlns:designData="clr-namespace:UserControl.UserControls.DesignData">
+
+    <userControl:Employee x:Key="DesignDataEmployee" Name="Alice (DesignData)" />
+
+    <designData:WrapPanelUserControlPropertiesDesignData x:Key="DesignDataContacts">
+        <designData:WrapPanelUserControlPropertiesDesignData.WrapItems>
+         <designData:ObservableCollectionContracts>
+                <userControl:Employee Name="Alice (DesignData)" />
+                <userControl:Customer Name="Bob (DesignData)" />
+            </designData:ObservableCollectionContracts>
+        </designData:WrapPanelUserControlPropertiesDesignData.WrapItems>
+    </designData:WrapPanelUserControlPropertiesDesignData>
+
+</ResourceDictionary>
