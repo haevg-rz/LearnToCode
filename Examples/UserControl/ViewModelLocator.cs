@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using GalaSoft.MvvmLight.Ioc;
+﻿using GalaSoft.MvvmLight.Ioc;
 
 namespace UserControl
 {
@@ -9,11 +6,9 @@ namespace UserControl
     {
         public ViewModelLocator()
         {
+            SimpleIoc.Default.Register<ViewModel>();
         }
 
-        public ViewModel ViewModel
-        {
-            get { return new ViewModel(); }
-        }
+        public ViewModel ViewModel => SimpleIoc.Default.GetInstance<ViewModel>();
     }
 }

@@ -11,8 +11,8 @@
         Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition />
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -22,7 +22,7 @@
         </Grid.ColumnDefinitions>
 
         <!-- Simple example for the use of user controls -->
-        <StackPanel>
+        <StackPanel Grid.RowSpan="2">
             <StackPanel.Resources>
                 <Style x:Key="ButtonStyle" TargetType="Button">
                     <Setter Property="Margin" Value="5" />
@@ -45,10 +45,11 @@
         </StackPanel>
 
         <!-- Simple example for the use of user controls -->
-        <userControls:MenuUserControl Grid.Column="1" />
+        <userControls:MenuUserControl Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" VerticalAlignment="Top" />
 
         <!-- Simple example with ItemsControl.ItemTemplate for the use of user controls -->
-        <ItemsControl Grid.Row="0" Grid.Column="2" ItemsSource="{Binding Contacts}">
+        <ItemsControl Grid.Row="0" Grid.Column="2" ItemsSource="{Binding Contacts}" BorderBrush="Black"
+                      BorderThickness="0.5">
             <ItemsControl.Template>
                 <ControlTemplate>
                     <ScrollViewer>
@@ -68,7 +69,8 @@
             </ItemsControl.ItemTemplate>
         </ItemsControl>
 
-        <ItemsControl Grid.Row="0" Grid.Column="3" ItemsSource="{Binding Contacts}">
+        <ItemsControl Grid.Row="0" Grid.Column="3" ItemsSource="{Binding Contacts}" BorderBrush="Black"
+                      BorderThickness="0.5">
             <ItemsControl.Template>
                 <ControlTemplate>
                     <ScrollViewer>
@@ -83,8 +85,8 @@
             </ItemsControl.ItemTemplate>
         </ItemsControl>
 
-        <userControls:WrapPanelUserControl Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"
-                                           WrapItems="{Binding Contacts}" />
+        <userControls:WrapPanelUserControl Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2"
+                                           WrapItems="{Binding Contacts}" BorderBrush="Black" BorderThickness="0.5" />
 
     </Grid>
 </Window>

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows.Controls;
 using System.Windows.Threading;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
@@ -50,15 +49,9 @@ namespace UserControl
             else
                 this.Contacts.Add(new Customer());
 
-            foreach (var employee in this.Contacts.Where(contact => contact is Employee).Cast<Employee>())
-            {
-                employee.Salery += new Random().Next(0, (int) (employee.Salery * 0.1));
-            }
+            foreach (var employee in this.Contacts.Where(contact => contact is Employee).Cast<Employee>()) employee.Salery += new Random().Next(0, (int) (employee.Salery * 0.1));
 
-            foreach (var employee in this.Contacts.Where(contact => contact is Customer).Cast<Customer>())
-            {
-                employee.LastOrder = employee.LastOrder.AddDays(new Random().Next(0, 14));
-            }
+            foreach (var employee in this.Contacts.Where(contact => contact is Customer).Cast<Customer>()) employee.LastOrder = employee.LastOrder.AddDays(new Random().Next(0, 14));
         }
 
         private void AddCommandHandling(Type type)
