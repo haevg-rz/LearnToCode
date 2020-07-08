@@ -1,0 +1,30 @@
+﻿<Window x:Class="GUI.View.ConfigWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GUI.View"
+        mc:Ignorable="d"
+        Title="ConfigWindow" Height="150" Width="400"
+        DataContext="{Binding Source={StaticResource Locator}, Path=Config}">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="7*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        
+        <TextBlock Grid.Column="0" Grid.Row="0" Text="Datenpfad:" />
+        <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Path=DataPathValue, UpdateSourceTrigger=PropertyChanged}" />
+
+        <TextBlock Grid.Column="0" Grid.Row="1" Text="Aktiviert:" />
+        <CheckBox Grid.Column="1" Grid.Row="1" IsChecked="{Binding Path=IsEnabledValue, UpdateSourceTrigger=PropertyChanged}" />
+
+        <Button Grid.Column="1" Grid.Row="2" Width="120" Height="30" Content="Speichern"
+                Command="{Binding Path=SendDataCommand}"/>
+    </Grid>
+</Window>

@@ -1,0 +1,31 @@
+﻿<Window x:Class="GUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800"
+        DataContext="{Binding Source={StaticResource Locator}, Path=Main}">
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        
+
+        <Button Grid.Column="1" Content="Konfiguration ändern" HorizontalAlignment="Center" VerticalAlignment="Center"
+                Command="{Binding Path=ShowConfigCommand}"/>
+        <StackPanel DataContext="{Binding Path=CurrentConfig}" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Datenpfad:" />
+                <TextBlock Text="{Binding Path=DataPath}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Aktiviert:" />
+                <CheckBox IsChecked="{Binding Path=IsEnabled}" />
+            </StackPanel>
+        </StackPanel>
+
+    </Grid>
+</Window>
