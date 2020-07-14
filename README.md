@@ -20,7 +20,7 @@ Learning assets from our students and trainees.
 12. [Gherkin](Examples/GherkinExample/README.md)
 13. [WPF Binding Performance](Examples/WPFUiBindingPerformance/README.md)
 14. [UserControls](Examples/UserControl/README.md)
-15. [Using multiple windows in WPF apps](Examples/WPFMultipleWindowsWithmessenger/README.md)
+15. [Using multiple windows in WPF apps](Examples/WPFMultipleWindowsWithMessenger/README.md)
 ## Contribute
 
 How these pattern to create a visual studio solution.
